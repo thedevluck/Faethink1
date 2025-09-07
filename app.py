@@ -148,17 +148,19 @@ elif menu == "Projetos da Escola":
     st.write("Aqui estão alguns projetos em andamento na nossa escola:")
 
     # Projeto 1
-    with st.container():
-        col1, col2 = st.columns([1,5])
-        with col1:
-            st.image("https://i.imgur.com/N2DeKr9.png", width=200)
-        with col2:
-            st.markdown("<div class='card'><h3>Jornal A Voz do Republica 🤖</h3><p><a href='https://www.instagram.com/avoz_republica/'>📸 Instagram</a></p></div>", unsafe_allow_html=True)
+    col1, col2 = st.columns([1,5])
+    with col1:
+        st.image("https://i.imgur.com/N2DeKr9.png", width=200)
+    with col2:
+        st.markdown("### Jornal A Voz do Republica 🤖")
+        st.markdown("[📸 Instagram](https://www.instagram.com/avoz_republica/)")
+
+    st.divider()
 
     # Projeto 2
-    with st.container():
-        col1, col2 = st.columns([1,5])
-        with col1:
-            st.image("https://i.imgur.com/PAHqMhJ.png", width=200)
-        with col2:
-            st.markdown("<div class='card'><h3>Projeto Multiplicadores 🎭</h3><p><a href='https://www.instagram.com/alunomultiplicador/'>📸 Instagram</a></p></div>", unsafe_allow_html=True)
+    col1, col2 = st.columns([1,5])
+    with col1:
+        st.image("https://i.imgur.com/PAHqMhJ.png", width=200)
+    with col2:
+        st.markdown("### Projeto Multiplicadores 🎭")
+        st.markdown("[📸 Instagram](https://www.instagram.com/alunomultiplicador/)")
