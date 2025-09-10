@@ -224,3 +224,13 @@ elif menu == "Projetos da Escola":
     with col2:
         st.markdown("### Projeto Vida ✝")
         st.markdown("[📸 Instagram](https://www.instagram.com/projetovidafaetec/)")
+                
+    st.divider()
+
+    # Projeto 5
+    col1, col2 = st.columns([1,5])
+    with col1:
+        st.image("https://i.imgur.com/lVtd1Yy.png", width=200)
+    with col2:
+        st.markdown("### Gremio Vivaz 💫")
+        st.markdown("[📸 Instagram](https://www.instagram.com/gremio.vivaz/)")
