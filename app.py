@@ -168,12 +168,9 @@ if menu == "Chatbot":
 elif menu == "Sobre o Projeto":
     st.markdown("## ℹ️ Sobre o FaeThink")
 
-    col1, col2 = st.columns([1, 2])  # imagem na esquerda, texto na direita
+    col1, col2 = st.columns([2, 1])  # texto ocupa mais espaço, imagem menos
 
-    with col1:
-        st.image("https://i.imgur.com/fTew3xy.png", width=400)  # 👉 troque para sua imagem do imgur
-
-    with col2:
+    with col1:  # Texto à esquerda
         st.write("""
         O **FaeThink 🎓** é um projeto criado para ajudar alunos da Faetec 
         a encontrarem informações rápidas sobre:
@@ -184,6 +181,9 @@ elif menu == "Sobre o Projeto":
 
         Nosso objetivo é facilitar a vida dos estudantes com tecnologia acessível 🚀.
         """)
+
+    with col2:  # Imagem à direita
+        st.image("https://i.imgur.com/fTew3xy.png", width=300)
 
 # -------- PROJETOS DA ESCOLA --------
 elif menu == "Projetos da Escola":
