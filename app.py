@@ -164,3 +164,24 @@ elif menu == "Projetos da Escola":
     with col2:
         st.markdown("### Projeto Multiplicadores 🎭")
         st.markdown("[📸 Instagram](https://www.instagram.com/alunomultiplicador/)")
+        
+    st.divider()
+
+    # Projeto 3
+    col1, col2 = st.columns([1,5])
+    with col1:
+        st.image("https://i.imgur.com/VR8il50.jpeg", width=200)
+    with col2:
+        st.markdown("### NÚCLEO DE ENSINO DE LINGUAS 🌍")
+        st.markdown("[📸 Instagram](https://www.instagram.com/nel_ete_republica/)")
+                
+    st.divider()
+
+    # Projeto 4
+    col1, col2 = st.columns([1,5])
+    with col1:
+        st.image("https://i.imgur.com/VuIxG81.png", width=200)
+    with col2:
+        st.markdown("### Projeto Vida ✝")
+        st.markdown("[📸 Instagram](https://www.instagram.com/projetovidafaetec/)")
+        
