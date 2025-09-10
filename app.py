@@ -109,10 +109,10 @@ if menu == "Chatbot":
         st.markdown("### 💬 Chat")
 
         base_conhecimento = [
-            {"keywords": ["estágio", "trabalho"], "resposta": "🤖 Você pode procurar estágio no setor de carreiras da escola, na sala ***."},
-            {"keywords": ["boletim", "notas"], "resposta": "🤖 O boletim pode ser pego na secretaria após cada trimestre."},
-            {"keywords": ["horário", "aulas"], "resposta": "🤖 O horário completo das aulas está disponível no mural da escola."},
-            {"keywords": ["secretaria", "contato"], "resposta": "🤖 Você pode falar com a secretaria pessoalmente, assim que entrar na escola à esquerda."}
+            {"keywords": ["estágio", "trabalho"], "resposta": "Você pode procurar estágio no setor de carreiras da escola, na sala ***."},
+            {"keywords": ["boletim", "notas"], "resposta": "O boletim pode ser pego na secretaria após cada trimestre."},
+            {"keywords": ["horário", "aulas"], "resposta": "O horário completo das aulas está disponível no mural da escola."},
+            {"keywords": ["secretaria", "contato"], "resposta": "Você pode falar com a secretaria pessoalmente, assim que entrar na escola à esquerda."}
         ]
 
         if "conversa" not in st.session_state:
@@ -123,7 +123,7 @@ if menu == "Chatbot":
         if st.button("Enviar"):
             if pergunta_usuario:
                 pergunta_lower = pergunta_usuario.lower()
-                resposta_bot = "🤖 Desculpe, não entendi sua pergunta 😅"
+                resposta_bot = "Desculpe, não entendi sua pergunta 😅"
 
                 for item in base_conhecimento:
                     if any(k in pergunta_lower for k in item["keywords"]):
