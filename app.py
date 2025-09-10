@@ -165,22 +165,37 @@ if menu == "Chatbot":
             st.session_state.conversa = []
 
 # -------- SOBRE O PROJETO --------
+# -------- SOBRE O PROJETO --------
 elif menu == "Sobre o Projeto":
-    st.markdown("## 🎓 Bem vindo ao FaeThink")
+    st.markdown("## Bem-vindo ao FaeThink 🎓")
 
-    col1, col2 = st.columns([2, 1])  # texto ocupa mais espaço, imagem menos
+    with st.container():
+        col1, col2 = st.columns([1, 2])  # imagem menor, texto maior
 
-    with col1:  # Texto à esquerda
-        st.write("""
-        A plataforma criada para te ajudar e responder suas duvidas sobre a escola.
+        with col1:
+            st.image("https://i.imgur.com/fTew3xy.png", width=250)  # sua imagem
 
-        No Faethink, você encontra tudo o que precisa para além de responder suas duvidas, também socializar.
+        with col2:
+            st.markdown("""
+                <h3 style='font-size: 22px; color: #4A90E2; font-weight: bold;'>Seu assistente escolar da FAETEC</h3>
+                <p style='font-size: 17px;'>O <b>FaeThink 🎓</b> ajuda você a encontrar informações rápidas sobre:</p>
+                <ul style='font-size: 16px;'>
+                    <li>Estágios</li>
+                    <li>Boletim</li>
+                    <li>Horários</li>
+                    <li>Secretaria</li>
+                </ul>
+                <p style='font-size: 17px;'>Facilitando sua vida com tecnologia acessível e prática 🚀.</p>
+            """, unsafe_allow_html=True)
 
-        Nosso objetivo é facilitar a vida dos estudantes com tecnologia acessível 🚀.
-        """)
-
-    with col2:  # Imagem à direita
-        st.image("https://i.imgur.com/fTew3xy.png", width=450)
+    # Botões para navegação
+    col1_btn, col2_btn = st.columns([1, 1])
+    with col1_btn:
+        if st.button("💬 Ir para Chatbot"):
+            st.session_state["menu"] = "Chatbot"  # atualiza a variável do menu
+    with col2_btn:
+        if st.button("📢 Ver Projetos da Escola"):
+            st.session_state["menu"] = "Projetos da Escola"
 
 # -------- PROJETOS DA ESCOLA --------
 elif menu == "Projetos da Escola":
