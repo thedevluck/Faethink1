@@ -192,7 +192,7 @@ elif menu == "Projetos da Escola":
     with col1:
         st.image("https://i.imgur.com/N2DeKr9.png", width=200)
     with col2:
-        st.markdown("### Jornal A Voz do Republica 🤖")
+        st.markdown("### Jornal A Voz do Republica 📰")
         st.markdown("[📸 Instagram](https://www.instagram.com/avoz_republica/)")
 
     st.divider()
