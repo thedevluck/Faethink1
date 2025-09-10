@@ -15,8 +15,6 @@ st.markdown(
         margin: 6px 0; 
         display: inline-block; 
         max-width: 70%; 
-        float: right; 
-        clear: both;
         box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
     }
     .balao-bot {
@@ -28,8 +26,6 @@ st.markdown(
         margin: 6px 0; 
         display: inline-block; 
         max-width: 70%; 
-        float: left; 
-        clear: both;
         box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
     }
     .titulo-gradient {
@@ -64,6 +60,26 @@ st.markdown(
         border-radius: 15px;
         box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
         margin-bottom: 20px;
+    }
+    .chat-linha {
+        display: flex;
+        align-items: flex-end;
+        margin: 8px 0;
+        clear: both;
+    }
+    .chat-linha.usuario {
+        justify-content: flex-end;
+    }
+    .chat-linha.bot {
+        justify-content: flex-start;
+    }
+    .chat-linha img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin: 0 8px;
+        object-fit: cover;
+        box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
     }
     </style>
     """,
@@ -117,12 +133,32 @@ if menu == "Chatbot":
                 st.session_state.conversa.append(("Você 😁", pergunta_usuario))
                 st.session_state.conversa.append(("FaeThink 🤖", resposta_bot))
 
-        # Exibe o histórico no estilo WhatsApp fofinho
+        # Links das fotos de perfil
+        foto_usuario = "https://i.imgur.com/5FAZMMX.png"  # 👉 troque pelo link da foto do usuário
+        foto_bot = "https://i.imgur.com/zg6qpgy.png"      # 👉 troque pelo link da foto do bot
+
+        # Exibe o histórico no estilo WhatsApp fofinho com foto de perfil
         for usuario, mensagem in st.session_state.conversa:
             if "Você" in usuario:
-                st.markdown(f"<div class='balao-usuario'>{mensagem}</div>", unsafe_allow_html=True)
+                st.markdown(
+                    f"""
+                    <div class='chat-linha usuario'>
+                        <div class='balao-usuario'>{mensagem}</div>
+                        <img src='{foto_usuario}' alt='Você'>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
             else:
-                st.markdown(f"<div class='balao-bot'>{mensagem}</div>", unsafe_allow_html=True)
+                st.markdown(
+                    f"""
+                    <div class='chat-linha bot'>
+                        <img src='{foto_bot}' alt='Bot'>
+                        <div class='balao-bot'>{mensagem}</div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
 
         if st.button("⬅️ Voltar"):
             st.session_state.abrir_chat = False
@@ -184,4 +220,3 @@ elif menu == "Projetos da Escola":
     with col2:
         st.markdown("### Projeto Vida ✝")
         st.markdown("[📸 Instagram](https://www.instagram.com/projetovidafaetec/)")
-        
