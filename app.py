@@ -166,21 +166,62 @@ if menu == "Chatbot":
 
 # -------- SOBRE O PROJETO --------
 elif menu == "Sobre o Projeto":
-    st.markdown("## 🎓 Bem vindo ao FaeThink")
+    col1, col2 = st.columns([6, 2])
+  with col1:
+    st.title("🎓 Bem-vindo ao :blue[Faethink]")
+  with col2:
+    st.markdown("<div style='margin-top:35px;'></div>", unsafe_allow_html=True)
+    thumbs = st.feedback("thumbs")
+    if "feedback_triggered" not in st.session_state:
+      st.session_state.feedback_triggered = False
 
-    col1, col2 = st.columns([2, 1])  # texto ocupa mais espaço, imagem menos
+    if thumbs is not None and not st.session_state.feedback_triggered:
+        if thumbs == 1:
+            st.balloons()
+        elif thumbs == 0:
+            st.toast("Isso não foi legal!")
 
-    with col1:  # Texto à esquerda
-        st.write("""
-        A plataforma criada para te ajudar e responder suas duvidas sobre a escola.
+        # Marca como já exibido
+        st.session_state.feedback_triggered = True
 
-        No Faethink, você encontra tudo o que precisa para além de responder suas duvidas, também socializar.
 
-        Nosso objetivo é facilitar a vida dos estudantes com tecnologia acessível 🚀.
-        """)
+  st.markdown("A plataforma criada por vestibulandos para vestibulandos.")
+  st.markdown("Na :blue[APROVA], você encontra tudo o que precisa para conquistar sua vaga nas principais universidades de São Paulo, com o poder da :blue[Inteligência Aritificial] te guiando em cada etapa.")
+ 
+  
+  st.write("")
+  
+  st.markdown("""
+            <h3 style='font-size: 20px; color: #36e096;'>Foco nos maiores vestibulares</h3>
+            <p style='font-size: 17px;'>Nosso foco é te preparar para os três principais vestibulares de São Paulo: Fuvest (2026), Unicamp (2026) e, é claro, o Enem (2025). Mas se o seu objetivo está em outro processo seletivo, não se preocupe, a plataforma também te ajuda nessa jornada.
+</p>
+    """, unsafe_allow_html=True)
 
-    with col2:  # Imagem à direita
-        st.image("https://i.imgur.com/fTew3xy.png", width=450)
+  if st.button("Conhecer os vestibulares", use_container_width=True, key="vestibulares_button"):
+        switch_to_tab("Vestibulares")
+  
+  st.divider()
+  
+  with st.container():
+    col1, col2 = st.columns([1, 2])
+
+  with col1: 
+    st.image("https://i.imgur.com/fTew3xy.png")
+
+  with col2:
+    st.markdown("""
+            <h3 style='font-size: 20px; color: #f26679;'>Estude de forme inteligente</h3>
+            <p style='font-size: 17px;'>Escolha a matéria que quer estudar e receba resumos gerados por IA, objetivos, claros e atualizados.</p>
+            <p style='font-size: 17px;'>Pratique com exercícios inéditos criados por Inteligência Artificial, adaptados ao seu ritmo.</p>
+            <p style='font-size: 17px;'>Evolua com foco: todo o conteúdo é organizado por disciplina.</p>
+    """, unsafe_allow_html=True)
+    col1, col2 = st.columns([1, 1])
+    with col1:
+      if st.button("Gerar resumos", use_container_width=True, key="resumos_button"):
+        switch_to_tab("Resumos")
+    with col2:
+      if st.button("Praticar", use_container_width=True, key="exercicios_button"):
+        switch_to_tab("Exercícios")
 
 # -------- PROJETOS DA ESCOLA --------
 elif menu == "Projetos da Escola":
