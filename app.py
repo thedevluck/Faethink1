@@ -180,7 +180,7 @@ elif menu == "Sobre o Projeto":
         """)
 
     with col2:  # Imagem à direita
-        st.image("https://i.imgur.com/fTew3xy.png", width=450)
+        st.image("https://i.imgur.com/fTew3xy.png", width=350)
 
 # -------- PROJETOS DA ESCOLA --------
 elif menu == "Projetos da Escola":
