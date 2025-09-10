@@ -168,10 +168,10 @@ if menu == "Chatbot":
 elif menu == "Sobre o Projeto":
     st.markdown("## ℹ️ Sobre o FaeThink")
 
-    col1, col2 = st.columns([1, 3])  # imagem na esquerda, texto na direita
+    col1, col2 = st.columns([1, 2])  # imagem na esquerda, texto na direita
 
     with col1:
-        st.image("https://i.imgur.com/fTew3xy.png", width=200)  # 👉 troque para sua imagem do imgur
+        st.image("https://i.imgur.com/fTew3xy.png", width=400)  # 👉 troque para sua imagem do imgur
 
     with col2:
         st.write("""
