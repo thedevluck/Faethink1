@@ -168,42 +168,30 @@ if menu == "Chatbot":
 elif menu == "Sobre o Projeto":
     st.markdown("## Bem-vindo ao FaeThink 🎓")
 
-    st.markdown(
-        """
-        <div style="display: flex; align-items: center; gap: 30px; margin-top: 20px;">
-            <!-- Imagem -->
-            <div style="flex: 1; text-align: center;">
-                <img src="https://i.imgur.com/fTew3xy.png" style="width: 220px; border-radius: 15px;">
-            </div>
+    with st.container():
+        col1, col2 = st.columns([1, 2])  # imagem menor, texto maior
 
-            <!-- Texto -->
-            <div style="flex: 2;">
-                <h3 style="font-size: 22px; color: #4A90E2; font-weight: bold; margin-bottom: 15px;">
-                    Seu assistente escolar da FAETEC
-                </h3>
-                <p style="font-size: 17px; margin-bottom: 10px;">
-                    O <b>FaeThink 🎓</b> ajuda você a encontrar informações rápidas sobre:
-                </p>
-                <ul style="font-size: 16px; line-height: 1.8;">
+        with col1:
+            st.image("https://i.imgur.com/fTew3xy.png", width=250)  # sua imagem
+
+        with col2:
+            st.markdown("""
+                <h3 style='font-size: 22px; color: #4A90E2; font-weight: bold;'>Seu assistente escolar da FAETEC</h3>
+                <p style='font-size: 17px;'>O <b>FaeThink 🎓</b> ajuda você a encontrar informações rápidas sobre:</p>
+                <ul style='font-size: 16px;'>
                     <li>Estágios</li>
                     <li>Boletim</li>
                     <li>Horários</li>
                     <li>Secretaria</li>
                 </ul>
-                <p style="font-size: 17px; margin-top: 15px;">
-                    Facilitando sua vida com tecnologia acessível e prática 🚀.
-                </p>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+                <p style='font-size: 17px;'>Facilitando sua vida com tecnologia acessível e prática 🚀.</p>
+            """, unsafe_allow_html=True)
 
     # Botões para navegação
     col1_btn, col2_btn = st.columns([1, 1])
     with col1_btn:
         if st.button("💬 Ir para Chatbot"):
-            st.session_state["menu"] = "Chatbot"
+            st.session_state["menu"] = "Chatbot"  # atualiza a variável do menu
     with col2_btn:
         if st.button("📢 Ver Projetos da Escola"):
             st.session_state["menu"] = "Projetos da Escola"
