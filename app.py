@@ -173,7 +173,8 @@ elif menu == "Sobre o Projeto":
     with col1:  # Texto à esquerda
         st.write("""
         A plataforma criada para te ajudar e responder suas duvidas sobre a escola.
-        st.markdown("## No Faethink, você encontra tudo o que precisa para além de responder suas duvidas, também socializar. ")
+
+        No Faethink, você encontra tudo o que precisa para além de responder suas duvidas, também socializar.
 
         Nosso objetivo é facilitar a vida dos estudantes com tecnologia acessível 🚀.
         """)
