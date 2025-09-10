@@ -87,7 +87,7 @@ st.markdown(
 )
 
 # Título principal
-st.markdown("<h1 class='titulo-gradient'>FaeThink 🎓</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='titulo-gradient'>FaeThink</h1>", unsafe_allow_html=True)
 st.markdown("<p class='subtitulo'>Seu assistente escolar da FAETEC com muito carinho 💙✨</p>", unsafe_allow_html=True)
 
 # Sidebar menu
@@ -166,18 +166,14 @@ if menu == "Chatbot":
 
 # -------- SOBRE O PROJETO --------
 elif menu == "Sobre o Projeto":
-    st.markdown("## ℹ️ Sobre o FaeThink")
+    st.markdown("## 🎓 Bem vindo ao FaeThink")
 
     col1, col2 = st.columns([2, 1])  # texto ocupa mais espaço, imagem menos
 
     with col1:  # Texto à esquerda
         st.write("""
-        O **FaeThink 🎓** é um projeto criado para ajudar alunos da Faetec 
-        a encontrarem informações rápidas sobre:
-        - Estágios
-        - Boletim
-        - Horários
-        - Secretaria
+        A plataforma criada para te ajudar e responder suas duvidas sobre a escola.
+        st.markdown("## No Faethink, você encontra tudo o que precisa para além de responder suas duvidas, também socializar. ")
 
         Nosso objetivo é facilitar a vida dos estudantes com tecnologia acessível 🚀.
         """)
