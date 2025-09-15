@@ -3,6 +3,43 @@ import unicodedata
 from rapidfuzz import fuzz, process
 
 st.set_page_config(page_title="FaeThink", page_icon="🎓", layout="wide")
+# ---------------- FUNÇÕES ----------------
+def normalizar_texto(texto: str) -> str:
+    """
+    Remove acentos, coloca tudo em minúsculas e tira caracteres especiais
+    """
+    texto = texto.lower()
+    texto = ''.join(
+        c for c in unicodedata.normalize('NFD', texto)
+        if unicodedata.category(c) != 'Mn'
+    )
+    return texto
+
+def buscar_resposta(pergunta: str, threshold: int = 70) -> str:
+    """
+    Procura a melhor resposta usando fuzzy matching.
+    Se a similaridade for maior que o threshold, retorna a resposta correspondente.
+    """
+    pergunta_norm = normalizar_texto(pergunta)
+
+    melhor_match = None
+    melhor_score = 0
+    melhor_resposta = "Desculpe, não encontrei uma resposta para sua pergunta."
+
+    for item in base_conhecimento:
+        # Normaliza keywords
+        keywords_norm = [normalizar_texto(k) for k in item["keywords"]]
+        match, score = process.extractOne(pergunta_norm, keywords_norm, scorer=fuzz.partial_ratio)
+
+        if score > melhor_score:
+            melhor_score = score
+            melhor_match = match
+            melhor_resposta = item["resposta"]
+
+    if melhor_score >= threshold:
+        return melhor_resposta
+    else:
+        return "Desculpe, não encontrei uma resposta clara para sua pergunta."
 
 # Estilos
 st.markdown(
@@ -114,7 +151,7 @@ if menu == "Chatbot":
     {
         "keywords": ["estágio", "estágios", "vaga de estágio"],
         "resposta": "A Faetec possui convênios com empresas e instituições para fornecer estágios aos alunos de cursos técnicos e de qualificação, gerenciados pela DIVEST."
-    }
+    },
     {
         "keywords": ["como me inscrevo", "inscrição estágio", "cadastrar estágio"],
         "resposta": "Os alunos podem se inscrever via portal de estágio da Faetec ou diretamente na DIVEST (Setor de Estágio)."
@@ -531,7 +568,6 @@ if menu == "Chatbot":
         "keywords": ["como se inscrever técnico", "inscrição curso técnico", "fazer inscrição técnico"],
         "resposta": "As inscrições para os cursos técnicos da Faetec são realizadas online pelo site oficial: www.faetec.rj.gov.br."
     },
-    [
   {
     "keywords": ["onde entregar boletim", "entregar boletim escolar", "apresentar boletim"],
     "resposta": "Você entrega (ou apresenta, se for documento externo) junto à Secretaria Acadêmica da FAETEC / ETER República. Em geral, esse setor é responsável por registrar formalmente boletins, documentos escolares, notas e demais registros acadêmicos."
@@ -639,7 +675,7 @@ if menu == "Chatbot":
   {
     "keywords": ["orientação estágio", "prática profissional", "estágio escolar"],
     "resposta": "Procure o setor de Estágios ou Prática Profissional da unidade. Caso não haja setor visível, vá à Coordenação de Curso ou Direção Pedagógica."
-  }
+  },
   {
     "keywords": ["oie","ola", "eae"],
     "resposta": "Opa amigão, no que posso te ajudar?"
@@ -658,7 +694,6 @@ if menu == "Chatbot":
   }
 ]
 
-]
 
 
         if "conversa" not in st.session_state:
