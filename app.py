@@ -3,43 +3,6 @@ import unicodedata
 from rapidfuzz import fuzz, process
 
 st.set_page_config(page_title="FaeThink", page_icon="🎓", layout="wide")
-# ---------------- FUNÇÕES ----------------
-def normalizar_texto(texto: str) -> str:
-    """
-    Remove acentos, coloca tudo em minúsculas e tira caracteres especiais
-    """
-    texto = texto.lower()
-    texto = ''.join(
-        c for c in unicodedata.normalize('NFD', texto)
-        if unicodedata.category(c) != 'Mn'
-    )
-    return texto
-
-def buscar_resposta(pergunta: str, threshold: int = 70) -> str:
-    """
-    Procura a melhor resposta usando fuzzy matching.
-    Se a similaridade for maior que o threshold, retorna a resposta correspondente.
-    """
-    pergunta_norm = normalizar_texto(pergunta)
-
-    melhor_match = None
-    melhor_score = 0
-    melhor_resposta = "Desculpe, não encontrei uma resposta para sua pergunta."
-
-    for item in base_conhecimento:
-        # Normaliza keywords
-        keywords_norm = [normalizar_texto(k) for k in item["keywords"]]
-        match, score = process.extractOne(pergunta_norm, keywords_norm, scorer=fuzz.partial_ratio)
-
-        if score > melhor_score:
-            melhor_score = score
-            melhor_match = match
-            melhor_resposta = item["resposta"]
-
-    if melhor_score >= threshold:
-        return melhor_resposta
-    else:
-        return "Desculpe, não encontrei uma resposta clara para sua pergunta."
 
 # Estilos
 st.markdown(
