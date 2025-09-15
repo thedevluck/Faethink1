@@ -1,6 +1,45 @@
 import streamlit as st
+import unicodedata
+from rapidfuzz import fuzz, process
 
 st.set_page_config(page_title="FaeThink", page_icon="🎓", layout="wide")
+# ---------------- FUNÇÕES ----------------
+def normalizar_texto(texto: str) -> str:
+    """
+    Remove acentos, coloca tudo em minúsculas e tira caracteres especiais
+    """
+    texto = texto.lower()
+    texto = ''.join(
+        c for c in unicodedata.normalize('NFD', texto)
+        if unicodedata.category(c) != 'Mn'
+    )
+    return texto
+
+def buscar_resposta(pergunta: str, threshold: int = 70) -> str:
+    """
+    Procura a melhor resposta usando fuzzy matching.
+    Se a similaridade for maior que o threshold, retorna a resposta correspondente.
+    """
+    pergunta_norm = normalizar_texto(pergunta)
+
+    melhor_match = None
+    melhor_score = 0
+    melhor_resposta = "Desculpe, não encontrei uma resposta para sua pergunta."
+
+    for item in base_conhecimento:
+        # Normaliza keywords
+        keywords_norm = [normalizar_texto(k) for k in item["keywords"]]
+        match, score = process.extractOne(pergunta_norm, keywords_norm, scorer=fuzz.partial_ratio)
+
+        if score > melhor_score:
+            melhor_score = score
+            melhor_match = match
+            melhor_resposta = item["resposta"]
+
+    if melhor_score >= threshold:
+        return melhor_resposta
+    else:
+        return "Desculpe, não encontrei uma resposta clara para sua pergunta."
 
 # Estilos
 st.markdown(
@@ -111,15 +150,15 @@ if menu == "Chatbot":
         base_conhecimento = [
     {
         "keywords": ["estágio", "estágios", "vaga de estágio"],
-        "resposta": "A Faetec possui convênios com empresas e instituições para fornecer estágios aos alunos de cursos técnicos e de qualificação, gerenciados pelo DIVEST."
-    },
+        "resposta": "A Faetec possui convênios com empresas e instituições para fornecer estágios aos alunos de cursos técnicos e de qualificação, gerenciados pela DIVEST."
+    }
     {
         "keywords": ["como me inscrevo", "inscrição estágio", "cadastrar estágio"],
-        "resposta": "Os alunos podem se inscrever via portal de estágio da Faetec ou diretamente no DIVEST (Setor de Estágio)."
+        "resposta": "Os alunos podem se inscrever via portal de estágio da Faetec ou diretamente na DIVEST (Setor de Estágio)."
     },
     {
         "keywords": ["estágio obrigatório", "obrigatoriedade do estágio"],
-        "resposta": "Depende do curso. Nos cursos técnicos, o estágio é obrigatório para a conclusão, com acompanhamento do DIVEST."
+        "resposta": "Depende do curso. Nos cursos técnicos, o estágio é obrigatório para a conclusão, com acompanhamento da DIVEST."
     },
     {
         "keywords": ["carga horária do estágio", "horas de estágio"],
@@ -529,6 +568,133 @@ if menu == "Chatbot":
         "keywords": ["como se inscrever técnico", "inscrição curso técnico", "fazer inscrição técnico"],
         "resposta": "As inscrições para os cursos técnicos da Faetec são realizadas online pelo site oficial: www.faetec.rj.gov.br."
     },
+    [
+  {
+    "keywords": ["onde entregar boletim", "entregar boletim escolar", "apresentar boletim"],
+    "resposta": "Você entrega (ou apresenta, se for documento externo) junto à Secretaria Acadêmica da FAETEC / ETER República. Em geral, esse setor é responsável por registrar formalmente boletins, documentos escolares, notas e demais registros acadêmicos."
+  },
+  {
+    "keywords": ["pegar boletim atrasado", "solicitar boletim antigo", "boletim não recebido"],
+    "resposta": "Faça uma solicitação formal à Secretaria Acadêmica, informando: seu nome completo, matrícula, curso/turma e o período do boletim que você não recebeu. Pode ser necessário preencher um requerimento (presencial ou digital) e aguardar o prazo interno para emissão."
+  },
+  {
+    "keywords": ["perdi comprovante matrícula", "segunda via comprovante matrícula"],
+    "resposta": "Com a Secretaria Acadêmica. Este setor pode emitir uma segunda via do comprovante de matrícula ou fornecer uma declaração oficial confirmando sua matrícula, mediante apresentação de documentos de identificação."
+  },
+  {
+    "keywords": ["segunda via documentos", "histórico escolar", "certificado", "declaração escolar"],
+    "resposta": "Para documentos como histórico escolar, declarações, certificados ou comprovantes, você deve: dirigir-se à Secretaria Acadêmica; preencher requerimento ou formulário específico; apresentar identificação pessoal; verificar se há taxa de emissão; aguardar o prazo estabelecido pela FAETEC (declarações em até 3 dias úteis, certificados em até 7 dias e histórico em até 30 dias úteis)."
+  },
+  {
+    "keywords": ["problemas notas", "erro lançamento nota", "nota incorreta"],
+    "resposta": "Proceda inicialmente com o professor responsável pela disciplina. Se não houver correção ou resposta satisfatória, leve ao Coordenador de Curso ou à Coordenação Pedagógica para formalizar a reclamação."
+  },
+  {
+    "keywords": ["erro frequência", "frequência incorreta", "faltas erradas"],
+    "resposta": "Primeiramente com o professor que faz a chamada da turma. Se ainda assim o erro persistir, leve à Coordenação de Curso e/ou à Secretaria para averiguação. Traga provas ou registros se possível."
+  },
+  {
+    "keywords": ["regularizar faltas", "faltas justificadas", "entregar atestado"],
+    "resposta": "Você deve apresentar justificativa formal com documentação (atestado médico ou justificativa legal). A justificativa deve ser protocolada na Secretaria Acadêmica ou setor indicado, respeitando o prazo definido no regulamento."
+  },
+  {
+    "keywords": ["datas provas", "datas trabalhos", "quando é prova"],
+    "resposta": "Datas são divulgadas em sala pelos professores, no plano de ensino, no calendário acadêmico da unidade, no site/portal da FAETEC ou em murais físicos."
+  },
+  {
+    "keywords": ["perdi prova", "faltar prova", "segunda chamada prova"],
+    "resposta": "Com o professor da disciplina primeiro. Em seguida, se necessário, com a Coordenação de Curso para verificar possibilidade de reposição ou segunda chamada, conforme regulamento interno."
+  },
+  {
+    "keywords": ["reagendar prova", "remarcar avaliação", "segunda chamada"],
+    "resposta": "Necessita-se de motivo justificado (problemas de saúde, imprevistos sérios, etc.) e documentação comprobatória. Solicitação formal deve ser feita à Secretaria ou Coordenação dentro dos prazos determinados."
+  },
+  {
+    "keywords": ["revisar prova", "ver prova corrigida", "revisão de nota"],
+    "resposta": "Normalmente com o professor da disciplina. Se houver canal institucional para revisão formal, será via Coordenador ou Direção."
+  },
+  {
+    "keywords": ["erro correção prova", "nota errada prova"],
+    "resposta": "Converse primeiro com o professor apresentando gabarito ou critérios. Se não resolver, leve à Coordenação do Curso ou Direção para revisão oficial."
+  },
+  {
+    "keywords": ["avaliações externas", "certificação", "provas externas"],
+    "resposta": "A Coordenação de Curso ou setor responsável divulgará editais, comunicados ou instruções no site da FAETEC, na unidade, por e-mail institucional ou em murais."
+  },
+  {
+    "keywords": ["prova substitutiva", "convocação substitutiva", "regra prova substitutiva"],
+    "resposta": "As normas constam no regimento interno. A convocação é feita pela Secretaria ou Coordenação por meio de edital ou aviso oficial com datas e requisitos."
+  },
+  {
+    "keywords": ["mudança horário aula", "alteração horário"],
+    "resposta": "Mudanças de horário são comunicadas pela Coordenação do Curso ou Direção, via murais, site, portal, e-mails institucionais ou avisos em sala."
+  },
+  {
+    "keywords": ["substituição professor", "troca de professor"],
+    "resposta": "A Coordenação de Curso ou Direção Pedagógica é responsável por comunicar substituição de professor, repassando o aviso à turma."
+  },
+  {
+    "keywords": ["dúvida conteúdo", "perguntar professor", "orientação técnica aula"],
+    "resposta": "Com o professor da disciplina. Se persistirem dúvidas, pode-se procurar a Coordenação de Curso ou monitores, se houver."
+  },
+  {
+    "keywords": ["confirmar conteúdo", "conteúdo ministrado", "plano de ensino"],
+    "resposta": "Verifique o plano de ensino da disciplina, cronograma, materiais do professor ou registros em plataformas institucionais."
+  },
+  {
+    "keywords": ["avisos eventos", "gincanas", "feiras técnicas", "eventos escolares"],
+    "resposta": "Avisos são publicados em murais, site/portal da unidade, redes sociais oficiais e comunicados internos."
+  },
+  {
+    "keywords": ["inscrição atividades extracurriculares", "atividades culturais", "atividades esportivas"],
+    "resposta": "A coordenação de Extensão anuncia editais ou convocações. O aluno deve preencher formulários ou inscrição conforme normas e prazos."
+  },
+  {
+    "keywords": ["acidente em aula prática", "acidente leve"],
+    "resposta": "Primeiro com o professor responsável pela aula. Depois, o incidente deve ser comunicado formalmente à Coordenação ou Direção da unidade."
+  },
+  {
+    "keywords": ["problema com colega", "problema com professor", "conflito escolar"],
+    "resposta": "Utilize canais formais: Coordenação de Curso, Direção Pedagógica, Orientação Educacional ou Ouvidoria. Protocolize o relato por escrito se possível."
+  },
+  {
+    "keywords": ["comunicados oficiais", "avisos escola"],
+    "resposta": "No site oficial da FAETEC / ETER, no portal do aluno, em murais físicos, e-mails institucionais ou avisos da Direção/Coordenação."
+  },
+  {
+    "keywords": ["mudança calendário escolar", "alteração calendário"],
+    "resposta": "Mudanças de calendário são divulgadas oficialmente pela FAETEC em comunicados no site, murais ou portal da unidade."
+  },
+  {
+    "keywords": ["cancelamento aula", "cancelamento evento", "aula cancelada"],
+    "resposta": "A Direção ou Coordenação emite comunicados oficiais, também por e-mail institucional, sistema interno ou murais."
+  },
+  {
+    "keywords": ["não recebi comunicado", "comunicação importante escola"],
+    "resposta": "Verifique se seus contatos estão atualizados na Secretaria. Consulte site, mural e canais oficiais. Caso persista, solicite reemissão ou confirmação na Secretaria."
+  },
+  {
+    "keywords": ["orientação estágio", "prática profissional", "estágio escolar"],
+    "resposta": "Procure o setor de Estágios ou Prática Profissional da unidade. Caso não haja setor visível, vá à Coordenação de Curso ou Direção Pedagógica."
+  }
+  {
+    "keywords": ["oie","ola", "eae"],
+    "resposta": "Opa amigão, no que posso te ajudar?"
+  },
+    {
+    "keywords": ["bom dia"],
+    "resposta": "Bom diaa! No que posso te ajudar?"
+  },
+    {
+    "keywords": ["boa tarde"],
+    "resposta": "Boa tarde! No que posso te ajudar?"
+  },
+      {
+    "keywords": ["boa noite"],
+    "resposta": "Boa noite! No que posso te ajudar?"
+  }
+]
+
 ]
 
 
