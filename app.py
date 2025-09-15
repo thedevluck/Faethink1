@@ -108,27 +108,7 @@ st.markdown("<p class='subtitulo'>Seu assistente escolar da FAETEC com muito car
 # Sidebar menu
 menu = st.sidebar.radio("📌 Navegação", ["Chatbot", "Sobre o Projeto", "Projetos da Escola"])
 
-# -------- CHATBOT --------
-if menu == "Chatbot":
-    st.markdown("## 👋 Bem-vindo ao FaeThink!")
-    st.write("Seu assistente especializado em FAETEC. Manda ver 😁!")
-
-    # Inicializar o estado se não existir
-    if "abrir_chat" not in st.session_state:
-        st.session_state.abrir_chat = False
-    if "conversa" not in st.session_state:
-        st.session_state.conversa = []
-
-    # Se o chat ainda não foi aberto
-    if not st.session_state.abrir_chat:
-        # Botão para abrir o chat
-        if st.button("💬 Abrir Chat", key="abrir"):
-            st.session_state.abrir_chat = True
-    else:
-        # Mostrar o chat
-        st.markdown("### 💬 Chat")
-
-    base_conhecimento = [
+base_conhecimento = [
     {
         "keywords": ["estagio", "estagios", "vaga"],
         "resposta": "A Faetec possui convênios com empresas e instituições para fornecer estágios aos alunos de cursos técnicos e de qualificação, gerenciados pela DIVEST."
@@ -634,59 +614,64 @@ if menu == "Chatbot":
         "resposta": "Boa noite! No que posso te ajudar?"
     }
 ]
-# Normaliza as keywords da base uma vez na inicialização
 for item in base_conhecimento:
     item['keywords'] = [normalizar_texto(k) for k in item.get('keywords', [])]
-
-# Inicializa estado
-if "conversa" not in st.session_state:
-    st.session_state.conversa = []
-
-pergunta_usuario = st.text_input("Digite sua mensagem:")
-
-if st.button("Enviar"):
-    if pergunta_usuario:
-        pergunta_normalizada = normalizar_texto(pergunta_usuario)
-        resposta_bot = "Desculpe, não entendi sua pergunta 😅"
-
-        for item in base_conhecimento:
-            if any(k in pergunta_normalizada for k in item["keywords"]):
-                resposta_bot = item["resposta"]
-                break
-
-        st.session_state.conversa.append(("Você 😁", pergunta_usuario))
-        st.session_state.conversa.append(("FaeThink 🤖", resposta_bot))
-
-# Links das fotos de perfil
-foto_usuario = "https://i.imgur.com/5FAZMMX.png"
-foto_bot = "https://i.imgur.com/zg6qpgy.png"
-
-# Exibe o histórico
-for usuario, mensagem in st.session_state.conversa:
-    if "Você" in usuario:
-        st.markdown(
-            f"""
-            <div class='chat-linha usuario'>
-                <div class='balao-usuario'>{mensagem}</div>
-                <img src='{foto_usuario}' alt='Você'>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+# -------- CHATBOT --------
+if menu == "Chatbot":
+    st.markdown("## 👋 Bem-vindo ao FaeThink!")
+    st.write("Seu assistente especializado em FAETEC. Manda ver 😁!")
+    # Inicializar o estado se não existir
+    if "abrir_chat" not in st.session_state:
+        st.session_state.abrir_chat = False
+    if "conversa" not in st.session_state:
+        st.session_state.conversa = []
+    # Botão para abrir/fechar chat
+    if st.session_state.abrir_chat:
+        if st.button("⬅️ Fechar Chat"):
+            st.session_state.abrir_chat = False
+            st.session_state.conversa = []
     else:
-        st.markdown(
-            f"""
-            <div class='chat-linha bot'>
-                <img src='{foto_bot}' alt='Bot'>
-                <div class='balao-bot'>{mensagem}</div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-if st.button("⬅️ Voltar"):
-    st.session_state.abrir_chat = False
-    st.session_state.conversa = []
+        if st.button("💬 Abrir Chat"):
+            st.session_state.abrir_chat = True
+    # Mostrar chat se aberto
+    if st.session_state.abrir_chat:
+        st.markdown("### 💬 Chat")
+        pergunta_usuario = st.text_input("Digite sua mensagem:")
+        if st.button("Enviar"):
+            if pergunta_usuario:
+                pergunta_normalizada = normalizar_texto(pergunta_usuario)
+                resposta_bot = "Desculpe, não entendi sua pergunta 😅"
+                for item in base_conhecimento:
+                    if any(k in pergunta_normalizada for k in item["keywords"]):
+                        resposta_bot = item["resposta"]
+                        break
+                st.session_state.conversa.append(("Você 😁", pergunta_usuario))
+                st.session_state.conversa.append(("FaeThink 🤖", resposta_bot))
+        # Links das fotos de perfil
+        foto_usuario = "https://i.imgur.com/5FAZMMX.png"
+        foto_bot = "https://i.imgur.com/zg6qpgy.png"
+        # Exibe o histórico
+        for usuario, mensagem in st.session_state.conversa:
+            if "Você" in usuario:
+                st.markdown(
+                    f"""
+                    <div class='chat-linha usuario'>
+                        <div class='balao-usuario'>{mensagem}</div>
+                        <img src='{foto_usuario}' alt='Você'>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+            else:
+                st.markdown(
+                    f"""
+                    <div class='chat-linha bot'>
+                        <img src='{foto_bot}' alt='Bot'>
+                        <div class='balao-bot'>{mensagem}</div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
 # -------- SOBRE O PROJETO --------
 elif menu == "Sobre o Projeto":
     st.markdown("## 🎓 Bem vindo ao FaeThink")
