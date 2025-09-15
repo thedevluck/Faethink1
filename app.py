@@ -113,14 +113,19 @@ if menu == "Chatbot":
     st.markdown("## 👋 Bem-vindo ao FaeThink!")
     st.write("Seu assistente especializado em FAETEC. Manda ver 😁!")
 
-    # Botão para abrir o chat estilo WhatsApp
+    # Inicializar o estado se não existir
     if "abrir_chat" not in st.session_state:
         st.session_state.abrir_chat = False
+    if "conversa" not in st.session_state:
+        st.session_state.conversa = []
 
+    # Se o chat ainda não foi aberto
     if not st.session_state.abrir_chat:
-        if st.button("💬 Abrir Chat"):
+        # Botão para abrir o chat
+        if st.button("💬 Abrir Chat", key="abrir"):
             st.session_state.abrir_chat = True
     else:
+        # Mostrar o chat
         st.markdown("### 💬 Chat")
 
     base_conhecimento = [
