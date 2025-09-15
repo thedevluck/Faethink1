@@ -123,551 +123,511 @@ if menu == "Chatbot":
     else:
         st.markdown("### 💬 Chat")
 
-        base_conhecimento = [
+    base_conhecimento = [
     {
-        "keywords": ["estágio", "estágios", "vaga de estágio"],
+        "keywords": ["estagio", "estagios", "vaga"],
         "resposta": "A Faetec possui convênios com empresas e instituições para fornecer estágios aos alunos de cursos técnicos e de qualificação, gerenciados pela DIVEST."
     },
     {
-        "keywords": ["como me inscrevo", "inscrição estágio", "cadastrar estágio"],
+        "keywords": ["inscrever", "inscricao", "cadastrar"],
         "resposta": "Os alunos podem se inscrever via portal de estágio da Faetec ou diretamente na DIVEST (Setor de Estágio)."
     },
     {
-        "keywords": ["estágio obrigatório", "obrigatoriedade do estágio"],
+        "keywords": ["obrigatorio", "obrigatoriedade"],
         "resposta": "Depende do curso. Nos cursos técnicos, o estágio é obrigatório para a conclusão, com acompanhamento da DIVEST."
     },
     {
-        "keywords": ["carga horária do estágio", "horas de estágio"],
+        "keywords": ["carga", "horas", "horario"],
         "resposta": "A carga horária varia conforme o curso, geralmente entre 400 e 600 horas."
     },
     {
-        "keywords": ["bolsa estágio", "estágio remunerado"],
+        "keywords": ["bolsa", "remunerado", "auxílio"],
         "resposta": "Sim, alguns estágios oferecem bolsa auxílio, enquanto outros não são remunerados."
     },
     {
-        "keywords": ["estágio saúde", "enfermagem estágio"],
+        "keywords": ["saude", "enfermagem", "hospital", "clinica"],
         "resposta": "Cursos como Técnico em Enfermagem possuem estágio obrigatório em hospitais e clínicas parceiras."
     },
     {
-        "keywords": ["escolher empresa", "empresa do estágio"],
+        "keywords": ["empresa", "vagas", "escolher"],
         "resposta": "A escolha depende das vagas disponíveis nas empresas conveniadas com a Faetec."
     },
     {
-        "keywords": ["acompanhamento estágio", "supervisor estágio"],
+        "keywords": ["acompanhamento", "supervisor", "desempenho"],
         "resposta": "Sim, há supervisores que acompanham o desempenho do aluno durante o estágio."
     },
     {
-        "keywords": ["estágio fora do RJ", "estágio em outro estado"],
+        "keywords": ["fora", "outro", "estado", "externo"],
         "resposta": "Sim, desde que a empresa possua convênio com a Faetec."
     },
     {
-        "keywords": ["estágio informática", "estágio redes de computadores"],
+        "keywords": ["informática", "redes", "computadores", "tecnologia"],
         "resposta": "Sim, cursos de Informática e Redes de Computadores possuem oportunidades em empresas de tecnologia."
     },
     {
-        "keywords": ["como me inscrever", "inscrição", "fazer inscrição"],
+        "keywords": ["inscrever", "inscricao", "cadastrar"],
         "resposta": "As inscrições são realizadas exclusivamente pelo site oficial da Faetec: www.faetec.rj.gov.br/inscricoes."
     },
     {
-        "keywords": ["inscrição presencial", "fazer inscrição na escola"],
+        "keywords": ["presencial", "na escola", "presencial"],
         "resposta": "Não é possível fazer inscrição presencial. O processo é apenas online, conforme os editais."
     },
     {
-        "keywords": ["pagar inscrição", "taxa inscrição"],
+        "keywords": ["pagar", "taxa", "inscricao"],
         "resposta": "Sim. No processo seletivo 2025.2 a taxa foi de R$ 20,00."
     },
     {
-        "keywords": ["idade mínima", "qual idade para inscrição"],
+        "keywords": ["idade", "faixa etaria", "minima"],
         "resposta": "Depende do curso. Para cursos técnicos é necessário ter concluído o Ensino Fundamental. Para cursos de qualificação, a idade mínima é 16 anos."
     },
     {
-        "keywords": ["estrangeiro pode", "inscrição estrangeiro"],
+        "keywords": ["estrangeiro", "imigrante", "documentos"],
         "resposta": "Sim, desde que possua documentos oficiais válidos no Brasil, como CPF e RG."
     },
     {
-        "keywords": ["quantas vagas", "número de vagas"],
+        "keywords": ["vagas", "número", "ofertas"],
         "resposta": "No processo seletivo 2025.1 foram oferecidas 9.022 vagas, sendo mais de 7 mil para cursos técnicos."
     },
     {
-        "keywords": ["posso escolher mais de um curso", "vários cursos"],
+        "keywords": ["curso", "vários", "escolher"],
         "resposta": "Não. O candidato deve optar por apenas um curso por inscrição."
     },
     {
-        "keywords": ["cotas", "reserva de vagas"],
+        "keywords": ["cotas", "reservas", "vagas especiais"],
         "resposta": "Sim. A Faetec reserva vagas para candidatos com deficiência, filhos de servidores, entre outros critérios do edital."
     },
     {
-        "keywords": ["perdi o prazo", "inscrição fora do prazo"],
+        "keywords": ["perdi", "fui", "fora", "prazo"],
         "resposta": "É necessário aguardar o próximo processo seletivo. A Faetec não aceita inscrições fora do período."
     },
     {
-        "keywords": ["alterar dados", "corrigir inscrição"],
+        "keywords": ["alterar", "corrigir", "atualizar"],
         "resposta": "Durante o período de inscrição é possível corrigir informações no sistema online. Após o encerramento não há alterações."
     },
     {
-        "keywords": ["quais cursos", "cursos oferecidos", "cursos disponíveis"],
+        "keywords": ["quais", "curso", "disponíveis", "oferecidos"],
         "resposta": "A Faetec oferece cursos de Qualificação Profissional, Técnicos de Nível Médio e de Formação Inicial e Continuada, como Administração, Informática, Enfermagem, Segurança do Trabalho e Logística."
     },
     {
-        "keywords": ["curso online", "curso a distância", "ead"],
+        "keywords": ["online", "distancia", "ead"],
         "resposta": "Alguns cursos possuem atividades a distância, mas a maioria é presencial."
     },
     {
-        "keywords": ["curso de idiomas", "curso de inglês", "curso de espanhol"],
+        "keywords": ["idiomas", "ingles", "espanhol"],
         "resposta": "Sim. Em algumas unidades há cursos de línguas, como Inglês e Espanhol."
     },
     {
-        "keywords": ["curso de eletricista", "curso elétrica"],
+        "keywords": ["eletricista", "eletrica"],
         "resposta": "Sim. A Faetec oferece cursos como Eletricista Instalador e relacionados à área elétrica."
     },
     {
-        "keywords": ["curso de gastronomia", "cozinha", "confeitaria", "panificação"],
+        "keywords": ["gastronomia", "cozinha", "confeitaria", "panificacao"],
         "resposta": "Sim. Em algumas unidades há cursos de Auxiliar de Cozinha, Confeitaria e Panificação."
     },
     {
-        "keywords": ["curso técnico de administração", "técnico em administração"],
+        "keywords": ["administracao", "técnico", "administração"],
         "resposta": "Sim. O curso Técnico em Administração é ofertado em algumas unidades."
     },
     {
-        "keywords": ["curso técnico de logística", "técnico em logística"],
+        "keywords": ["logistica", "técnico", "logistica"],
         "resposta": "Sim. Algumas unidades oferecem o curso Técnico em Logística."
     },
     {
-        "keywords": ["curso de redes", "redes de computadores"],
+        "keywords": ["redes", "computadores", "tecnologia"],
         "resposta": "Sim. A Faetec oferece o curso Técnico em Redes de Computadores em determinadas unidades."
     },
     {
-        "keywords": ["cursos mais procurados", "curso popular"],
+        "keywords": ["mais procurados", "populares", "curso"],
         "resposta": "Os cursos mais procurados costumam ser Técnico em Enfermagem, Informática, Administração e Eletricista."
     },
     {
-        "keywords": ["atualiza cursos", "novos cursos", "mudança de cursos"],
+        "keywords": ["atualiza", "novos", "mudança"],
         "resposta": "Sim. A Faetec revisa periodicamente sua oferta de cursos de acordo com a demanda de mercado."
     },
     {
-        "keywords": ["documentos matrícula", "quais documentos", "documentos necessários"],
+        "keywords": ["documentos", "matricula", "necessarios", "requisitos"],
         "resposta": "Para matrícula, são exigidos: certidão de nascimento ou casamento, RG, CPF, fotos 3x4, título de eleitor (maiores de 18 anos), certificado de reservista (homens), diploma ou certificado do Ensino Médio e histórico escolar."
     },
     {
-        "keywords": ["usar CNH", "CNH no lugar do RG"],
+        "keywords": ["cnh", "carteira de motorista"],
         "resposta": "Sim. A CNH pode ser usada como documento oficial de identificação."
     },
     {
-        "keywords": ["preciso de título de eleitor", "documento título eleitor"],
+        "keywords": ["título de eleitor", "eleitor"],
         "resposta": "Não é obrigatório para matrícula, mas necessário para fins eleitorais, caso tenha mais de 18 anos."
     },
     {
-        "keywords": ["documentos digitais", "aceita digital", "gov.br"],
+        "keywords": ["digital", "gov.br", "online"],
         "resposta": "Sim. Documentos digitais oficiais, como os disponíveis no aplicativo gov.br, são aceitos."
     },
     {
-        "keywords": ["certidão nascimento serve", "matrícula com certidão"],
+        "keywords": ["certidao nascimento", "documento"],
         "resposta": "A certidão de nascimento pode ser aceita, mas é preferível apresentar o RG."
     },
     {
-        "keywords": ["enviar documentos por e-mail", "mandar por e-mail"],
+        "keywords": ["enviar", "por email", "digitalizar"],
         "resposta": "Não. Os documentos devem ser apresentados presencialmente no ato da matrícula."
     },
     {
-        "keywords": ["vacina obrigatória", "comprovante de vacinação"],
+        "keywords": ["vacina", "comprovante", "saúde"],
         "resposta": "Alguns cursos da área de saúde podem exigir comprovação de vacinação."
     },
     {
-        "keywords": ["comprovante escolaridade original", "preciso original"],
+        "keywords": ["comprovante escolaridade", "original", "certificado"],
         "resposta": "Sim. É necessário apresentar o comprovante original de escolaridade para conferência."
     },
     {
-        "keywords": ["menor de idade matrícula", "responsável matrícula"],
+        "keywords": ["menor", "menores", "responsável"],
         "resposta": "Sim. Menores de 18 anos devem estar acompanhados por responsável legal."
     },
     {
-        "keywords": ["cópias autenticadas", "aceita cópia autenticada"],
+        "keywords": ["copias", "autenticadas", "cópia autenticada"],
         "resposta": "Em geral, a Faetec exige documentos originais, mas cópias autenticadas podem ser aceitas em alguns casos."
     },
-     {
-        "keywords": ["resultado", "onde ver resultado", "consultar resultado"],
+    {
+        "keywords": ["resultado", "resultado", "consulta", "ver"],
         "resposta": "O resultado do processo seletivo está disponível no site oficial da Faetec, na seção de resultados: www.faetec.rj.gov.br."
     },
     {
-        "keywords": ["aviso por e-mail", "recebo e-mail resultado"],
+        "keywords": ["aviso", "email", "resultado"],
         "resposta": "Sim. Geralmente é enviado um e-mail avisando sobre a aprovação, mas é importante conferir no site."
     },
     {
-        "keywords": ["não fui chamado", "segunda chamada", "lista de espera"],
+        "keywords": ["não chamado", "segunda chamada", "lista de espera"],
         "resposta": "Se você não for chamado na primeira chamada, ainda pode ser convocado em chamadas subsequentes conforme as vagas."
     },
     {
-        "keywords": ["lista de espera", "posição na lista"],
+        "keywords": ["lista de espera", "posicao", "aguardar"],
         "resposta": "Os candidatos em lista de espera são chamados conforme a disponibilidade de vagas remanescentes. O edital explica como consultar sua posição."
     },
     {
-        "keywords": ["resultado simultâneo", "unidades resultado"],
+        "keywords": ["resultado", "publicado", "unidades"],
         "resposta": "Sim. O resultado é publicado ao mesmo tempo em todas as unidades no portal oficial."
     },
     {
-        "keywords": ["prazo matrícula", "até quando matricular"],
+        "keywords": ["prazo", "matricula", "validade"],
         "resposta": "O prazo para efetuar matrícula é informado no edital e deve ser rigorosamente cumprido."
     },
     {
-        "keywords": ["perder a vaga", "não compareci matrícula"],
-        "resposta": "Sim. Quem não comparece perde o direito à vaga."
+        "keywords": ["perder", "não comparecer", "matricula"],
+        "resposta": "Sim. Quem não comparece perde a vaga."
     },
     {
-        "keywords": ["segunda chamada", "convocação extra"],
+        "keywords": ["segunda chamada", "convocacao"],
         "resposta": "Caso sobrem vagas, haverá segunda chamada para aprovados."
     },
     {
-        "keywords": ["como saber lista de espera", "estou na lista de espera"],
+        "keywords": ["como saber", "lista de espera", "posicao"],
         "resposta": "O edital informa como consultar a posição na lista de espera pelo sistema da Faetec."
     },
     {
-        "keywords": ["recorrer resultado", "recurso resultado"],
+        "keywords": ["recorrer", "recurso", "resultado"],
         "resposta": "Sim. É possível recorrer dentro do prazo e critérios estabelecidos no edital."
     },
     {
-        "keywords": ["documentos matrícula", "quais documentos", "preciso levar"],
+        "keywords": ["documentos", "matricula", "quais", "necessarios"],
         "resposta": "São exigidos: certidão de nascimento ou casamento, RG, CPF, comprovante de residência, título de eleitor (maiores de 18 anos), certificado de reservista (homens), diploma ou certificado do Ensino Médio e histórico escolar."
     },
     {
-        "keywords": ["matrícula online", "fazer matrícula pela internet"],
+        "keywords": ["online", "matricula", "pela internet"],
         "resposta": "Não. A matrícula deve ser feita presencialmente na unidade onde o candidato foi aprovado."
     },
     {
-        "keywords": ["prazo matrícula", "até quando fazer matrícula"],
+        "keywords": ["prazo", "fim", "fazer matricula"],
         "resposta": "O prazo é estabelecido no edital de cada processo seletivo e deve ser rigorosamente cumprido."
     },
     {
-        "keywords": ["não compareci matrícula", "perder matrícula"],
+        "keywords": ["não compareci", "perdi", "matricula"],
         "resposta": "Quem não comparece à matrícula perde a vaga, que é repassada ao próximo da lista de espera."
     },
     {
-        "keywords": ["transferir matrícula", "mudar de unidade"],
-        "resposta": "Não é possível transferir a matrícula entre unidades da Faetec."
+        "keywords": ["transferir", "mudar", "unidade"],
+        "resposta": "Não é possível transferir matrícula entre unidades da Faetec."
     },
     {
-        "keywords": ["pagar matrícula", "taxa matrícula"],
+        "keywords": ["pagar", "taxa", "matricula"],
         "resposta": "Não. A matrícula é gratuita."
     },
     {
-        "keywords": ["mais de um curso", "matrícula em dois cursos"],
+        "keywords": ["mais de um", "matricula em dois", "cursos"],
         "resposta": "Sim, desde que os horários não coincidam. Caso contrário, será necessário optar por apenas um curso."
     },
     {
-        "keywords": ["matrícula em curso iniciado", "curso já começou"],
+        "keywords": ["curso iniciado", "curso ja começou", "matricula"],
         "resposta": "Em geral, a matrícula ocorre no início do semestre letivo. Exceções dependem da disponibilidade de vagas e autorização da instituição."
     },
     {
-        "keywords": ["informações matrícula", "onde ver matrícula"],
+        "keywords": ["informacoes", "matricula", "detalhes"],
         "resposta": "As informações sobre matrícula estão disponíveis no site oficial da Faetec e na página da COSEAC/UFF."
     },
     {
-        "keywords": ["documentos digitais matrícula", "aceita digital"],
+        "keywords": ["documentos digitais", "aceitos", "online"],
         "resposta": "Sim, desde que sejam documentos oficiais digitais aceitos pela instituição."
     },
     {
-        "keywords": ["cursos técnicos", "quais cursos técnicos", "técnico disponível"],
+        "keywords": ["cursos técnicos", "quais cursos", "técnico"],
         "resposta": "A Faetec oferece cursos técnicos em áreas como Administração, Informática, Enfermagem, Segurança do Trabalho, Logística, Eletrotécnica, Análises Clínicas, Design Gráfico, Música e Turismo."
     },
     {
-        "keywords": ["curso técnico acessível", "deficiente", "pessoa com deficiência"],
+        "keywords": ["deficiente", "pessoa com deficiência", "acessibilidade"],
         "resposta": "Sim. A Faetec oferece cursos técnicos com adaptações para garantir inclusão de pessoas com deficiência."
     },
     {
-        "keywords": ["curso noturno", "técnico à noite"],
+        "keywords": ["noturno", "a noite", "tarde"],
         "resposta": "Sim. Algumas unidades oferecem cursos técnicos no período noturno."
     },
     {
-        "keywords": ["curso subsequente", "já concluiu ensino médio"],
+        "keywords": ["subsequente", "já concluiu", "ensino medio"],
         "resposta": "Sim. Existem cursos subsequentes destinados a quem já concluiu o Ensino Médio."
     },
     {
-        "keywords": ["vagas cursos técnicos", "disponibilidade de vagas"],
+        "keywords": ["vagas", "disponibilidade", "curso"],
         "resposta": "A disponibilidade de vagas é informada no edital do processo seletivo."
     },
     {
-        "keywords": ["unidades cursos técnicos", "onde tem cursos técnicos"],
+        "keywords": ["unidades", "locais", "escolas"],
         "resposta": "Algumas unidades que oferecem cursos técnicos são: ETE Oscar Tenório, ETE Juscelino Kubitschek, ETE Ferreira Viana, ETE República e ETE Henrique Lage."
     },
     {
-        "keywords": ["estágio curso técnico", "estágio durante curso técnico"],
+        "keywords": ["estagio", "curso", "duracao", "pratica"],
         "resposta": "Sim. A Faetec possui parcerias com empresas que oferecem estágio prático durante os cursos técnicos."
     },
     {
-        "keywords": ["duração curso técnico", "quanto tempo dura técnico"],
+        "keywords": ["duracao", "tempo", "curso"],
         "resposta": "A duração varia de acordo com o curso, geralmente entre 1 a 2 anos."
     },
     {
-        "keywords": ["transferência curso técnico", "mudar curso técnico"],
+        "keywords": ["transferir", "mudar", "curso"],
         "resposta": "Não é possível transferir entre cursos técnicos. Para mudar de curso, é necessário participar de novo processo seletivo."
     },
     {
-        "keywords": ["certificação curso técnico", "diploma técnico", "certificado técnico"],
+        "keywords": ["certificacao", "diploma", "certificado"],
         "resposta": "Sim. Os cursos técnicos oferecem certificado reconhecido pelo MEC."
     },
     {
-        "keywords": ["curso técnico saúde", "técnico enfermagem", "técnico análises clínicas"],
+        "keywords": ["saude", "enfermagem", "analises", "clinicas"],
         "resposta": "Sim. A Faetec oferece cursos técnicos na área de saúde, como Técnico em Enfermagem e Técnico em Análises Clínicas."
     },
     {
-        "keywords": ["curso técnico música", "técnico em música"],
+        "keywords": ["musica", "tecnico", "curso"],
         "resposta": "Sim. É possível estudar música em unidades como Henrique Lage e Marechal Hermes."
     },
     {
-        "keywords": ["curso técnico informática", "técnico em informática", "técnico em redes"],
+        "keywords": ["informatica", "redes", "tecnico"],
         "resposta": "Sim. A Faetec oferece Técnico em Informática e Técnico em Redes de Computadores."
     },
     {
-        "keywords": ["curso técnico administração", "técnico em administração", "recursos humanos"],
+        "keywords": ["administracao", "recursos humanos", "gestao"],
         "resposta": "Sim. Há cursos como Técnico em Administração e Técnico em Recursos Humanos."
     },
     {
-        "keywords": ["curso técnico turismo", "guia de turismo", "hospedagem"],
+        "keywords": ["turismo", "guia", "hospedagem"],
         "resposta": "Sim. A Faetec oferece Técnico em Guia de Turismo e Técnico em Hospedagem."
     },
     {
-        "keywords": ["curso técnico logística", "técnico em logística", "transporte"],
+        "keywords": ["logistica", "transporte"],
         "resposta": "Sim. Há cursos técnicos como Logística e Transporte."
     },
     {
-        "keywords": ["curso técnico design gráfico", "produção multimídia"],
+        "keywords": ["design", "grafico", "multimidia"],
         "resposta": "Sim. A Faetec oferece Técnico em Design Gráfico e Produção Multimídia."
     },
     {
-        "keywords": ["curso técnico teatro", "artes cênicas", "produção teatral"],
+        "keywords": ["teatro", "artes", "cênicas"],
         "resposta": "Sim. Há cursos técnicos em Artes Cênicas e Produção Teatral."
     },
     {
-        "keywords": ["curso técnico gastronomia", "técnico cozinha", "técnico confeitaria"],
+        "keywords": ["gastronomia", "cozinha", "confeitaria", "padaria"],
         "resposta": "Sim. A Faetec oferece Técnico em Cozinha e Técnico em Confeitaria."
     },
     {
-        "keywords": ["curso técnico moda", "produção de moda", "modelagem do vestuário"],
+        "keywords": ["moda", "vestuário", "modelagem"],
         "resposta": "Sim. Existem cursos como Técnico em Produção de Moda e Modelagem do Vestuário."
     },
     {
-        "keywords": ["curso técnico mecânica", "manutenção automotiva"],
+        "keywords": ["mecanica", "automotiva", "manutenção"],
         "resposta": "Sim. A Faetec oferece Técnico em Mecânica e Técnico em Manutenção Automotiva."
     },
     {
-        "keywords": ["curso técnico eletrônica", "automação industrial"],
+        "keywords": ["eletronica", "automacao"],
         "resposta": "Sim. Há cursos técnicos em Eletrônica e Automação Industrial."
     },
     {
-        "keywords": ["curso técnico telecomunicações", "redes comunicação"],
+        "keywords": ["telecom", "redes", "sistemas"],
         "resposta": "Sim. A Faetec oferece Técnico em Redes de Comunicação e Sistemas de Telecomunicações."
     },
     {
-        "keywords": ["curso técnico segurança do trabalho", "curso técnico meio ambiente"],
+        "keywords": ["segurança", "meio ambiente", "tst"],
         "resposta": "Sim. Há cursos como Técnico em Segurança do Trabalho e Técnico em Meio Ambiente."
     },
     {
-        "keywords": ["curso técnico logística portuária", "operações portuárias"],
+        "keywords": ["logistica", "porto", "operacoes"],
         "resposta": "Sim. A Faetec oferece Técnico em Logística Portuária e Operações Portuárias."
     },
     {
-        "keywords": ["curso técnico transporte", "técnico em transporte rodoviário"],
-        "resposta": "Sim. Há cursos como Técnico em Transporte e Transporte Rodoviário."
+        "keywords": ["transporte", "rodoviario", "aereo", "maritimo", "fluvial"],
+        "resposta": "Sim. Há cursos como Técnico em Transporte Rodoviário, Aéreo, Marítimo e Fluvial."
     },
     {
-        "keywords": ["curso técnico gestão empresarial", "gestão de negócios"],
-        "resposta": "Sim. A Faetec oferece Técnico em Gestão Empresarial e Gestão de Negócios."
+        "keywords": ["pre-requisitos", "quem pode fazer", "requisitos"],
+        "resposta": "Para cursos subsequentes é necessário ter concluído o Ensino Médio. Para concomitante externo, é preciso estar matriculado no 2º ano do Ensino Médio."
     },
     {
-        "keywords": ["curso técnico recursos humanos", "gestão de pessoas"],
-        "resposta": "Sim. Existem cursos técnicos em Recursos Humanos e Gestão de Pessoas."
-    },
-    {
-        "keywords": ["curso técnico logística internacional", "comércio exterior"],
-        "resposta": "Sim. A Faetec oferece Técnico em Logística Internacional e Comércio Exterior."
-    },
-    {
-        "keywords": ["curso técnico transporte ferroviário", "operações ferroviárias"],
-        "resposta": "Sim. Há cursos como Técnico em Transporte Ferroviário e Operações Ferroviárias."
-    },
-    {
-        "keywords": ["curso técnico transporte aéreo", "operações aéreas"],
-        "resposta": "Sim. A Faetec oferece Técnico em Transporte Aéreo e Operações Aéreas."
-    },
-    {
-        "keywords": ["curso técnico transporte marítimo", "operações marítimas"],
-        "resposta": "Sim. Há cursos como Técnico em Transporte Marítimo e Operações Marítimas."
-    },
-    {
-        "keywords": ["curso técnico transporte fluvial", "operações fluviais"],
-        "resposta": "Sim. A Faetec oferece Técnico em Transporte Fluvial e Operações Fluviais."
-    },
-    {
-        "keywords": ["curso técnico transporte rodoviário internacional", "operações rodoviárias internacionais"],
-        "resposta": "Sim. Há cursos como Técnico em Transporte Rodoviário Internacional e Operações Rodoviárias Internacionais."
-    },
-    {
-        "keywords": ["pré-requisitos cursos técnicos", "quem pode fazer técnico"],
-        "resposta": "Para cursos subsequentes é necessário ter concluído o Ensino Médio. Para concomitante externa, é preciso estar matriculado no 2º ano do Ensino Médio."
-    },
-    {
-        "keywords": ["inscrição cursos técnicos", "como se inscrever técnico"],
+        "keywords": ["inscricao", "se inscrever", "como fazer"],
         "resposta": "As inscrições para cursos técnicos são realizadas online pelo site oficial: www.faetec.rj.gov.br."
     },
     {
-        "keywords": ["quais unidades", "unidades faetec", "escolas faetec"],
+        "keywords": ["unidades", "escolas", "locais"],
         "resposta": "A Faetec possui diversas unidades distribuídas pelo estado do Rio de Janeiro, incluindo escolas técnicas, ISEPs, CVTs e unidades de qualificação profissional."
     },
     {
-        "keywords": ["quantas unidades", "número de unidades"],
+        "keywords": ["quantas unidades", "numero de unidades"],
         "resposta": "A Faetec conta com mais de 120 unidades em todo o estado do Rio de Janeiro."
     },
     {
-        "keywords": ["diretorias regionais", "divisão por regiões"],
+        "keywords": ["diretoria", "regional", "gestao"],
         "resposta": "As unidades da Faetec estão organizadas em Diretorias Regionais que fazem a gestão administrativa e pedagógica de acordo com cada região."
     },
     {
-        "keywords": ["qual a sede", "onde fica a sede da faetec"],
+        "keywords": ["sede", "localizacao"],
         "resposta": "A sede administrativa da Faetec está localizada no Rio de Janeiro, na Rua Clarimundo de Melo, 847 – Quintino Bocaiúva."
     },
     {
-        "keywords": ["responsável unidade", "quem administra a unidade"],
+        "keywords": ["responsavel", "administra", "diretoria"],
         "resposta": "Cada unidade da Faetec possui direção própria, subordinada às Diretorias Regionais e à presidência da instituição."
     },
     {
-        "keywords": ["contato unidade", "telefone unidade", "como falar com a unidade"],
+        "keywords": ["contato", "telefone", "email"],
         "resposta": "Os contatos de cada unidade (telefone, e-mail, endereço) estão disponíveis no site oficial da Faetec: www.faetec.rj.gov.br."
     },
     {
-        "keywords": ["transferência de unidade", "mudar de unidade"],
+        "keywords": ["transferencia", "mudar", "unidade"],
         "resposta": "Não é permitido transferir matrícula entre unidades. O aluno deve participar de novo processo seletivo."
     },
     {
-        "keywords": ["pré-requisitos técnico", "quem pode fazer técnico", "requisitos curso técnico"],
-        "resposta": "Para cursos técnicos subsequentes é necessário ter concluído o Ensino Médio. Já para concomitante externa, é preciso estar matriculado no 2º ano do Ensino Médio."
+        "keywords": ["entregar", "boletim", "documento"],
+        "resposta": "Você entrega (ou apresenta, se for documento externo) junto à Secretaria Acadêmica da FAETEC / ETER República. Em geral, esse setor é responsável por registrar formalmente boletins, documentos escolares, notas e demais registros acadêmicos."
     },
     {
-        "keywords": ["como se inscrever técnico", "inscrição curso técnico", "fazer inscrição técnico"],
-        "resposta": "As inscrições para os cursos técnicos da Faetec são realizadas online pelo site oficial: www.faetec.rj.gov.br."
+        "keywords": ["solicitar", "boletim", "antigo"],
+        "resposta": "Faça uma solicitação formal à Secretaria Acadêmica, informando: seu nome completo, matrícula, curso/turma e o período do boletim que você não recebeu. Pode ser necessário preencher um requerimento (presencial ou digital) e aguardar o prazo interno para emissão."
     },
-  {
-    "keywords": ["onde entregar boletim", "entregar boletim escolar", "apresentar boletim"],
-    "resposta": "Você entrega (ou apresenta, se for documento externo) junto à Secretaria Acadêmica da FAETEC / ETER República. Em geral, esse setor é responsável por registrar formalmente boletins, documentos escolares, notas e demais registros acadêmicos."
-  },
-  {
-    "keywords": ["pegar boletim atrasado", "solicitar boletim antigo", "boletim não recebido"],
-    "resposta": "Faça uma solicitação formal à Secretaria Acadêmica, informando: seu nome completo, matrícula, curso/turma e o período do boletim que você não recebeu. Pode ser necessário preencher um requerimento (presencial ou digital) e aguardar o prazo interno para emissão."
-  },
-  {
-    "keywords": ["perdi comprovante matrícula", "segunda via comprovante matrícula"],
-    "resposta": "Com a Secretaria Acadêmica. Este setor pode emitir uma segunda via do comprovante de matrícula ou fornecer uma declaração oficial confirmando sua matrícula, mediante apresentação de documentos de identificação."
-  },
-  {
-    "keywords": ["segunda via documentos", "histórico escolar", "certificado", "declaração escolar"],
-    "resposta": "Para documentos como histórico escolar, declarações, certificados ou comprovantes, você deve: dirigir-se à Secretaria Acadêmica; preencher requerimento ou formulário específico; apresentar identificação pessoal; verificar se há taxa de emissão; aguardar o prazo estabelecido pela FAETEC (declarações em até 3 dias úteis, certificados em até 7 dias e histórico em até 30 dias úteis)."
-  },
-  {
-    "keywords": ["problemas notas", "erro lançamento nota", "nota incorreta"],
-    "resposta": "Proceda inicialmente com o professor responsável pela disciplina. Se não houver correção ou resposta satisfatória, leve ao Coordenador de Curso ou à Coordenação Pedagógica para formalizar a reclamação."
-  },
-  {
-    "keywords": ["erro frequência", "frequência incorreta", "faltas erradas"],
-    "resposta": "Primeiramente com o professor que faz a chamada da turma. Se ainda assim o erro persistir, leve à Coordenação de Curso e/ou à Secretaria para averiguação. Traga provas ou registros se possível."
-  },
-  {
-    "keywords": ["regularizar faltas", "faltas justificadas", "entregar atestado"],
-    "resposta": "Você deve apresentar justificativa formal com documentação (atestado médico ou justificativa legal). A justificativa deve ser protocolada na Secretaria Acadêmica ou setor indicado, respeitando o prazo definido no regulamento."
-  },
-  {
-    "keywords": ["datas provas", "datas trabalhos", "quando é prova"],
-    "resposta": "Datas são divulgadas em sala pelos professores, no plano de ensino, no calendário acadêmico da unidade, no site/portal da FAETEC ou em murais físicos."
-  },
-  {
-    "keywords": ["perdi prova", "faltar prova", "segunda chamada prova"],
-    "resposta": "Com o professor da disciplina primeiro. Em seguida, se necessário, com a Coordenação de Curso para verificar possibilidade de reposição ou segunda chamada, conforme regulamento interno."
-  },
-  {
-    "keywords": ["reagendar prova", "remarcar avaliação", "segunda chamada"],
-    "resposta": "Necessita-se de motivo justificado (problemas de saúde, imprevistos sérios, etc.) e documentação comprobatória. Solicitação formal deve ser feita à Secretaria ou Coordenação dentro dos prazos determinados."
-  },
-  {
-    "keywords": ["revisar prova", "ver prova corrigida", "revisão de nota"],
-    "resposta": "Normalmente com o professor da disciplina. Se houver canal institucional para revisão formal, será via Coordenador ou Direção."
-  },
-  {
-    "keywords": ["erro correção prova", "nota errada prova"],
-    "resposta": "Converse primeiro com o professor apresentando gabarito ou critérios. Se não resolver, leve à Coordenação do Curso ou Direção para revisão oficial."
-  },
-  {
-    "keywords": ["avaliações externas", "certificação", "provas externas"],
-    "resposta": "A Coordenação de Curso ou setor responsável divulgará editais, comunicados ou instruções no site da FAETEC, na unidade, por e-mail institucional ou em murais."
-  },
-  {
-    "keywords": ["prova substitutiva", "convocação substitutiva", "regra prova substitutiva"],
-    "resposta": "As normas constam no regimento interno. A convocação é feita pela Secretaria ou Coordenação por meio de edital ou aviso oficial com datas e requisitos."
-  },
-  {
-    "keywords": ["mudança horário aula", "alteração horário"],
-    "resposta": "Mudanças de horário são comunicadas pela Coordenação do Curso ou Direção, via murais, site, portal, e-mails institucionais ou avisos em sala."
-  },
-  {
-    "keywords": ["substituição professor", "troca de professor"],
-    "resposta": "A Coordenação de Curso ou Direção Pedagógica é responsável por comunicar substituição de professor, repassando o aviso à turma."
-  },
-  {
-    "keywords": ["dúvida conteúdo", "perguntar professor", "orientação técnica aula"],
-    "resposta": "Com o professor da disciplina. Se persistirem dúvidas, pode-se procurar a Coordenação de Curso ou monitores, se houver."
-  },
-  {
-    "keywords": ["confirmar conteúdo", "conteúdo ministrado", "plano de ensino"],
-    "resposta": "Verifique o plano de ensino da disciplina, cronograma, materiais do professor ou registros em plataformas institucionais."
-  },
-  {
-    "keywords": ["avisos eventos", "gincanas", "feiras técnicas", "eventos escolares"],
-    "resposta": "Avisos são publicados em murais, site/portal da unidade, redes sociais oficiais e comunicados internos."
-  },
-  {
-    "keywords": ["inscrição atividades extracurriculares", "atividades culturais", "atividades esportivas"],
-    "resposta": "A coordenação de Extensão anuncia editais ou convocações. O aluno deve preencher formulários ou inscrição conforme normas e prazos."
-  },
-  {
-    "keywords": ["acidente em aula prática", "acidente leve"],
-    "resposta": "Primeiro com o professor responsável pela aula. Depois, o incidente deve ser comunicado formalmente à Coordenação ou Direção da unidade."
-  },
-  {
-    "keywords": ["problema com colega", "problema com professor", "conflito escolar"],
-    "resposta": "Utilize canais formais: Coordenação de Curso, Direção Pedagógica, Orientação Educacional ou Ouvidoria. Protocolize o relato por escrito se possível."
-  },
-  {
-    "keywords": ["comunicados oficiais", "avisos escola"],
-    "resposta": "No site oficial da FAETEC / ETER, no portal do aluno, em murais físicos, e-mails institucionais ou avisos da Direção/Coordenação."
-  },
-  {
-    "keywords": ["mudança calendário escolar", "alteração calendário"],
-    "resposta": "Mudanças de calendário são divulgadas oficialmente pela FAETEC em comunicados no site, murais ou portal da unidade."
-  },
-  {
-    "keywords": ["cancelamento aula", "cancelamento evento", "aula cancelada"],
-    "resposta": "A Direção ou Coordenação emite comunicados oficiais, também por e-mail institucional, sistema interno ou murais."
-  },
-  {
-    "keywords": ["não recebi comunicado", "comunicação importante escola"],
-    "resposta": "Verifique se seus contatos estão atualizados na Secretaria. Consulte site, mural e canais oficiais. Caso persista, solicite reemissão ou confirmação na Secretaria."
-  },
-  {
-    "keywords": ["orientação estágio", "prática profissional", "estágio escolar"],
-    "resposta": "Procure o setor de Estágios ou Prática Profissional da unidade. Caso não haja setor visível, vá à Coordenação de Curso ou Direção Pedagógica."
-  },
-  {
-    "keywords": ["oie","ola", "eae"],
-    "resposta": "Opa amigão, no que posso te ajudar?"
-  },
     {
-    "keywords": ["bom dia"],
-    "resposta": "Bom diaa! No que posso te ajudar?"
-  },
+        "keywords": ["perdi", "comprovante", "matricula"],
+        "resposta": "Com a Secretaria Acadêmica. Este setor pode emitir uma segunda via do comprovante de matrícula ou fornecer uma declaração oficial confirmando sua matrícula, mediante apresentação de documentos de identificação."
+    },
     {
-    "keywords": ["boa tarde"],
-    "resposta": "Boa tarde! No que posso te ajudar?"
-  },
-      {
-    "keywords": ["boa noite"],
-    "resposta": "Boa noite! No que posso te ajudar?"
-  }
+        "keywords": ["segunda via", "documentos", "historico", "certificado", "declaracao"],
+        "resposta": "Para documentos como histórico escolar, declarações, certificados ou comprovantes, você deve: dirigir-se à Secretaria Acadêmica; preencher requerimento ou formulário específico; apresentar identificação pessoal; verificar se há taxa de emissão; aguardar o prazo estabelecido pela FAETEC (declarações em até 3 dias úteis, certificados em até 7 dias e histórico em até 30 dias úteis)."
+    },
+    {
+        "keywords": ["problemas", "notas", "erro", "lancamento"],
+        "resposta": "Proceda inicialmente com o professor responsável pela disciplina. Se não houver correção ou resposta satisfatória, leve ao Coordenador de Curso ou à Coordenação Pedagógica para formalizar a reclamação."
+    },
+    {
+        "keywords": ["erro", "frequencia", "faltas", "incorreta"],
+        "resposta": "Primeiramente com o professor que faz a chamada da turma. Se ainda assim o erro persistir, leve à Coordenação de Curso e/ou à Secretaria para averiguação. Traga provas ou registros se possível."
+    },
+    {
+        "keywords": ["regularizar", "faltas", "justificadas", "atestado"],
+        "resposta": "Você deve apresentar justificativa formal com documentação (atestado médico ou justificativa legal). A justificativa deve ser protocolada na Secretaria Acadêmica ou setor indicado, respeitando o prazo definido no regulamento."
+    },
+    {
+        "keywords": ["datas", "provas", "trabalhos", "quando"],
+        "resposta": "Datas são divulgadas em sala pelos professores, no plano de ensino, no calendário acadêmico da unidade, no site/portal da FAETEC ou em murais físicos."
+    },
+    {
+        "keywords": ["perdi", "prova", "falta", "segunda chamada"],
+        "resposta": "Com o professor da disciplina primeiro. Em seguida, se necessário, com a Coordenação de Curso para verificar possibilidade de reposição ou segunda chamada, conforme regulamento interno."
+    },
+    {
+        "keywords": ["reagendar", "prova", "avaliacao", "segunda"],
+        "resposta": "Necessita-se de motivo justificado (problemas de saúde, imprevistos sérios, etc.) e documentação comprobatória. Solicitação formal deve ser feita à Secretaria ou Coordenação dentro dos prazos determinados."
+    },
+    {
+        "keywords": ["revisar", "ver", "prova", "nota"],
+        "resposta": "Normalmente com o professor da disciplina. Se houver canal institucional para revisão formal, será via Coordenador ou Direção."
+    },
+    {
+        "keywords": ["erro", "correcao", "nota", "prova"],
+        "resposta": "Converse primeiro com o professor apresentando gabarito ou critérios. Se não resolver, leve à Coordenação do Curso ou Direção para revisão oficial."
+    },
+    {
+        "keywords": ["avaliacoes", "externas", "certificacao", "provas"],
+        "resposta": "A Coordenação de Curso ou setor responsável divulgará editais, comunicados ou instruções no site da FAETEC, na unidade, por e-mail institucional ou em murais."
+    },
+    {
+        "keywords": ["prova", "substitutiva", "convocacao", "regra"],
+        "resposta": "As normas constam no regimento interno. A convocação é feita pela Secretaria ou Coordenação por meio de edital ou aviso oficial com datas e requisitos."
+    },
+    {
+        "keywords": ["mudanca", "horario", "aula", "alteracao"],
+        "resposta": "Mudanças de horário são comunicadas pela Coordenação do Curso ou Direção, via murais, site, portal, e-mails institucionais ou avisos em sala."
+    },
+    {
+        "keywords": ["substituicao", "professor", "troca", "aula"],
+        "resposta": "A Coordenação de Curso ou Direção Pedagógica é responsável por comunicar substituição de professor, repassando o aviso à turma."
+    },
+    {
+        "keywords": ["duvida", "conteudo", "professor", "orientacao"],
+        "resposta": "Com o professor da disciplina. Se persistirem dúvidas, pode-se procurar a Coordenação de Curso ou monitores, se houver."
+    },
+    {
+        "keywords": ["confirmar", "conteudo", "aula", "plano"],
+        "resposta": "Verifique o plano de ensino da disciplina, cronograma, materiais do professor ou registros em plataformas institucionais."
+    },
+    {
+        "keywords": ["avisos", "eventos", "gincanas", "feiras", "programacoes"],
+        "resposta": "Avisos são publicados em murais, site/portal da unidade, redes sociais oficiais e comunicados internos."
+    },
+    {
+        "keywords": ["atividades", "extracurriculares", "culturais", "esportivas"],
+        "resposta": "A coordenação de Extensão anuncia editais ou convocações. O aluno deve preencher formulários ou inscrição conforme normas e prazos."
+    },
+    {
+        "keywords": ["acidente", "aula", "pratica", "leve"],
+        "resposta": "Primeiro com o professor responsável pela aula. Depois, o incidente deve ser comunicado formalmente à Coordenação ou Direção da unidade."
+    },
+    {
+        "keywords": ["problema", "colega", "professor", "conflito"],
+        "resposta": "Utilize canais formais: Coordenação de Curso, Direção Pedagógica, Orientação Educacional ou Ouvidoria. Protocolize o relato por escrito se possível."
+    },
+    {
+        "keywords": ["comunicados", "avisos", "escola"],
+        "resposta": "No site oficial da FAETEC / ETER, no portal do aluno, em murais físicos, e-mails institucionais ou avisos da Direção/Coordenação."
+    },
+    {
+        "keywords": ["mudanca", "calendario", "escolar", "alteracao"],
+        "resposta": "Mudanças de calendário são divulgadas oficialmente pela FAETEC em comunicados no site, murais ou portal da unidade."
+    },
+    {
+        "keywords": ["cancelamento", "aula", "evento"],
+        "resposta": "A Direção ou Coordenação emite comunicados oficiais, também por e-mail institucional, sistema interno ou murais."
+    },
+    {
+        "keywords": ["nao", "não", "comunicado", "aviso"],
+        "resposta": "Verifique se seus contatos estão atualizados na Secretaria. Consulte site, mural e canais oficiais. Caso persista, solicite reemissão ou confirmação na Secretaria."
+    },
+    {
+        "keywords": ["estagio", "pratica", "profissional", "escolar"],
+        "resposta": "Procure o setor de Estágios ou Prática Profissional da unidade. Caso não haja setor visível, vá à Coordenação de Curso ou Direção Pedagógica."
+    },
+    {
+        "keywords": ["ola", "oi", "eae"],
+        "resposta": "Opa amigão, no que posso te ajudar?"
+    },
+    {
+        "keywords": ["bom", "dia"],
+        "resposta": "Bom diaa! No que posso te ajudar?"
+    },
+    {
+        "keywords": ["boa", "tarde"],
+        "resposta": "Boa tarde! No que posso te ajudar?"
+    },
+    {
+        "keywords": ["boa", "noite"],
+        "resposta": "Boa noite! No que posso te ajudar?"
+    }
 ]
 # Normaliza as keywords da base uma vez na inicialização
 for item in base_conhecimento:
