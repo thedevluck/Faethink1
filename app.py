@@ -373,7 +373,7 @@ if menu == "Chatbot":
         "resposta": "Sim. A Faetec oferece cursos técnicos com adaptações para garantir inclusão de pessoas com deficiência."
     },
     {
-        "keywords": ["noturno", "a noite", "tarde"],
+        "keywords": ["noturno", "a noite",],
         "resposta": "Sim. Algumas unidades oferecem cursos técnicos no período noturno."
     },
     {
