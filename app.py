@@ -505,7 +505,7 @@ if menu == "Chatbot":
         "resposta": "Não é permitido transferir matrícula entre unidades. O aluno deve participar de novo processo seletivo."
     },
     {
-        "keywords": ["entregar", "documento"],
+        "keywords": ["entrego", "documento"],
         "resposta": "Você entrega (ou apresenta, se for documento externo) junto à Secretaria Acadêmica da FAETEC / ETER República. Em geral, esse setor é responsável por registrar formalmente boletins, documentos escolares, notas e demais registros acadêmicos."
     },
     {
