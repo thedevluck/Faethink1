@@ -505,11 +505,11 @@ if menu == "Chatbot":
         "resposta": "Não é permitido transferir matrícula entre unidades. O aluno deve participar de novo processo seletivo."
     },
     {
-        "keywords": ["entregar", "boletim", "documento"],
+        "keywords": ["entregar", "documento"],
         "resposta": "Você entrega (ou apresenta, se for documento externo) junto à Secretaria Acadêmica da FAETEC / ETER República. Em geral, esse setor é responsável por registrar formalmente boletins, documentos escolares, notas e demais registros acadêmicos."
     },
     {
-        "keywords": ["solicito", "boletim", "antigo"],
+        "keywords": ["solicito", "antigo"],
         "resposta": "Faça uma solicitação formal à Secretaria Acadêmica, informando: seu nome completo, matrícula, curso/turma e o período do boletim que você não recebeu. Pode ser necessário preencher um requerimento (presencial ou digital) e aguardar o prazo interno para emissão."
     },
     {
