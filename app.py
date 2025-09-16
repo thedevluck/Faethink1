@@ -182,7 +182,7 @@ base_conhecimento = [
         "resposta": "Sim. A Faetec reserva vagas para candidatos com deficiência, filhos de servidores, entre outros critérios do edital."
     },
     {
-        "keywords": ["perdi", "fui", "fora", "prazo"],
+        "keywords": ["fui", "fora", "prazo"],
         "resposta": "É necessário aguardar o próximo processo seletivo. A Faetec não aceita inscrições fora do período."
     },
     {
