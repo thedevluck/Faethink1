@@ -680,11 +680,11 @@ elif menu == "Sobre o Projeto":
 
     with col1:  # Texto à esquerda
         st.write("""
-        A plataforma criada para te ajudar e responder suas duvidas sobre a escola.
+        O FaeThink é uma ferramenta digital desenvolvida para oferecer suporte aos estudantes da instituição. Sua principal finalidade é responder dúvidas relacionadas ao campus e disponibilizar informações relevantes para o cotidiano escolar.
 
-        No Faethink, você encontra tudo o que precisa para além de responder suas duvidas, também socializar.
+Além de esclarecer questões, o FaeThink também apresenta os projetos em andamento na escola, permitindo que a comunidade acadêmica acompanhe, participe e conheça melhor as iniciativas promovidas pela instituição. Trata-se de um recurso que contribui para ampliar a transparência e o acesso às informações.
 
-        Nosso objetivo é facilitar a vida dos estudantes com tecnologia acessível 🚀.
+Nosso compromisso é facilitar a comunicação entre a escola e seus estudantes por meio da tecnologia. 🚀 Com o FaeThink, garantimos um canal confiável e acessível para consulta, interação e acompanhamento das atividades do campus.
         """)
 
     with col2:  # Imagem à direita
