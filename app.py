@@ -762,7 +762,7 @@ elif menu == "Jogo":
         st.session_state.x = 250
         st.session_state.y = 250
         st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
-        st.session_state.score = 0
+        st.session_state.contador = 0  # contador de itens coletados
         st.session_state.itens = []
         st.session_state.cooldown = True  # jogo ativo
         ITEM_IMG = "https://i.imgur.com/i23vEr2.png"
@@ -792,7 +792,7 @@ elif menu == "Jogo":
                 st.session_state.y < item["y"] + ITEM_TAM and
                 st.session_state.y + PERSONAGEM_TAM > item["y"]
             ):
-                st.session_state.score += 1
+                st.session_state.contador += 1  # aumenta o contador
             else:
                 novas_posicoes.append(item)
         st.session_state.itens = novas_posicoes
@@ -870,7 +870,7 @@ elif menu == "Jogo":
             unsafe_allow_html=True
         )
 
-    # Controles e score à direita
+    # Controles e contador à direita
     with col2:
         st.write("### Controles")
 
@@ -888,8 +888,8 @@ elif menu == "Jogo":
         with col_right:
             st.button("➡️", on_click=move_right)
 
-        st.markdown(f"### Pontos: {st.session_state.score}")
+        st.markdown(f"### Itens coletados: {st.session_state.contador}/5")
 
-        # Mensagem de fim de cooldown
+        # Mensagem de fim de jogo
         if not st.session_state.cooldown:
-            st.success("🎉 Você coletou todos os itens!")
+            st.success("🎉 Você coletou todos os itens! O jogo acabou!")
