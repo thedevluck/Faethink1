@@ -250,10 +250,6 @@ base_conhecimento = [
         "resposta": "Não. Os documentos devem ser apresentados presencialmente no ato da matrícula."
     },
     {
-        "keywords": ["vacina", "comprovante", "saúde"],
-        "resposta": "Alguns cursos da área de saúde podem exigir comprovação de vacinação."
-    },
-    {
         "keywords": ["comprovante escolaridade", "original", "certificado"],
         "resposta": "Sim. É necessário apresentar o comprovante original de escolaridade para conferência."
     },
