@@ -765,8 +765,8 @@ elif menu == "Jogo":
         st.session_state.y = 250
         st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
         st.session_state.itens = []
-        st.session_state.cooldown = True  # jogo ativo
-        st.session_state.tempo = 0  # tempo em segundos
+        st.session_state.cooldown = True
+        st.session_state.tempo = 0
         st.session_state.ultima_atualizacao = time.time()
 
         ITEM_IMG = "https://i.imgur.com/i23vEr2.png"
@@ -784,7 +784,7 @@ elif menu == "Jogo":
     ITEM_TAM = 30
     PASSO = 20
 
-    # ======= FUNÇÕES =======
+    # ======= FUNÇÕES DE MOVIMENTO =======
     def coletar_item():
         novas_posicoes = []
         for item in st.session_state.itens:
@@ -794,7 +794,7 @@ elif menu == "Jogo":
                 st.session_state.y < item["y"] + ITEM_TAM and
                 st.session_state.y + PERSONAGEM_TAM > item["y"]
             ):
-                pass
+                pass  # coletou o item
             else:
                 novas_posicoes.append(item)
         st.session_state.itens = novas_posicoes
@@ -833,7 +833,9 @@ elif menu == "Jogo":
         if delta >= 1:
             st.session_state.tempo += int(delta)
             st.session_state.ultima_atualizacao = agora
-            st.experimental_rerun()  # apenas isso já atualiza o timer
+        # Atualiza a página a cada 1 segundo
+        st.experimental_rerun = None  # remove uso antigo
+        st_autorefresh = st.autorefresh(interval=1000, key="timer_refresh")  
 
     # ======= ESTILO =======
     st.markdown(f"""
@@ -884,10 +886,12 @@ elif menu == "Jogo":
         with col_middle: st.button("⬇️", on_click=move_down)
         with col_right: st.button("➡️", on_click=move_right)
 
+        # Formatar tempo
         horas = st.session_state.tempo // 3600
         minutos = (st.session_state.tempo % 3600) // 60
         segundos = st.session_state.tempo % 60
         st.markdown(f"### Tempo: {horas:02d}:{minutos:02d}:{segundos:02d}")
 
+        # Mensagem final
         if not st.session_state.cooldown:
             st.success(f"🎉 Você coletou todos os itens em {horas:02d}:{minutos:02d}:{segundos:02d}!")
