@@ -760,8 +760,8 @@ elif menu == "Calendario ETER":
 elif menu == "Jogo":
     # ======= INICIALIZAÇÃO DO JOGO =======
     if "x" not in st.session_state:
-        st.session_state.x = 250
-        st.session_state.y = 250
+        st.session_state.x = 150
+        st.session_state.y = 150
         st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
         st.session_state.contador = 0  # contador de itens coletados
         st.session_state.itens = []
@@ -777,11 +777,11 @@ elif menu == "Jogo":
             })
 
     # ======= CONFIGURAÇÃO DO CENÁRIO =======
-    CENARIO_LARGURA = 500
-    CENARIO_ALTURA = 500
-    PERSONAGEM_TAM = 50
+    CENARIO_LARGURA = 300
+    CENARIO_ALTURA = 300
+    PERSONAGEM_TAM = 30
     ITEM_TAM = 30
-    PASSO = 20
+    PASSO = 5
 
     # ======= FUNÇÕES DE MOVIMENTO =======
     def coletar_item():
