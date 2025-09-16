@@ -779,9 +779,9 @@ elif menu == "Jogo":
     # ======= CONFIGURAÇÃO DO CENÁRIO =======
     CENARIO_LARGURA = 300
     CENARIO_ALTURA = 300
-    PERSONAGEM_TAM = 20
+    PERSONAGEM_TAM = 25
     ITEM_TAM = 25
-    PASSO = 25
+    PASSO = 20
 
     # ======= FUNÇÕES DE MOVIMENTO =======
     def coletar_item():
