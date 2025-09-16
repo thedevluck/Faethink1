@@ -742,3 +742,8 @@ elif menu == "Projetos da Escola":
     with col2:
         st.markdown("### Gremio Vivaz 💫")
         st.markdown("[📸 Instagram](https://www.instagram.com/gremio.vivaz/)")
+
+# -------- Calendario escolar --------
+elif menu == "Calendario ETER":
+    st.markdown("## 📅 Calendario")
+    st.write("Abaixo temos o calendario da ETER desse ano")
