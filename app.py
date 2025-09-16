@@ -751,39 +751,45 @@ elif menu == "Jogo":
         st.session_state.y = 250
         st.session_state.img = "https://i.imgur.com/dzTWFvq.png"  # imagem inicial (S)
 
-    # ======= FUNÇÕES DE MOVIMENTO =======
+    # ======= TAMANHO DO CENÁRIO =======
+    CENARIO_LARGURA = 500
+    CENARIO_ALTURA = 500
+    PERSONAGEM_TAM = 50
+    PASSO = 20  # quantos pixels anda por movimento
+
+    # ======= FUNÇÕES DE MOVIMENTO COM COLISÃO =======
     def move_up():
-        st.session_state.y -= 20
+        st.session_state.y = max(0, st.session_state.y - PASSO)
         st.session_state.img = "https://i.imgur.com/csPu1r4.png"
 
     def move_down():
-        st.session_state.y += 20
+        st.session_state.y = min(CENARIO_ALTURA - PERSONAGEM_TAM, st.session_state.y + PASSO)
         st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
 
     def move_left():
-        st.session_state.x -= 20
+        st.session_state.x = max(0, st.session_state.x - PASSO)
         st.session_state.img = "https://i.imgur.com/v8h0N4j.png"
 
     def move_right():
-        st.session_state.x += 20
+        st.session_state.x = min(CENARIO_LARGURA - PERSONAGEM_TAM, st.session_state.x + PASSO)
         st.session_state.img = "https://i.imgur.com/BSAbZic.png"
 
     # ======= ESTILO DO CENÁRIO =======
     st.markdown(
-        """
+        f"""
         <style>
-        .cenario {
+        .cenario {{
             background-color: #808080; /* cinza */
-            width: 500px;
-            height: 500px;
+            width: {CENARIO_LARGURA}px;
+            height: {CENARIO_ALTURA}px;
             position: relative;
             margin: auto;
             border: 3px solid black;
-        }
-        .personagem {
+        }}
+        .personagem {{
             position: absolute;
             transition: all 0.2s;
-        }
+        }}
         </style>
         """,
         unsafe_allow_html=True
@@ -800,7 +806,7 @@ elif menu == "Jogo":
                 <img src="{st.session_state.img}" 
                     class="personagem" 
                     style="left:{st.session_state.x}px; top:{st.session_state.y}px;" 
-                    width="50">
+                    width="{PERSONAGEM_TAM}">
             </div>
             """,
             unsafe_allow_html=True
@@ -809,7 +815,7 @@ elif menu == "Jogo":
     # Botões na direita
     with col2:
         st.write("### Controles")
-        st.button("         ⬆️", on_click=move_up)
+        st.button("⬆️", on_click=move_up)
         col_a, col_b, col_c = st.columns([1,1,1])
         with col_a:
             st.button("⬅️", on_click=move_left)
