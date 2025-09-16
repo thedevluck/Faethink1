@@ -758,18 +758,18 @@ elif menu == "Calendario ETER":
         st.write(" ")
 
 elif menu == "Jogo":
-
-    # ======= INICIALIZAÇÃO =======
+    # ======= INICIALIZAÇÃO DO JOGO =======
     if "x" not in st.session_state:
         st.session_state.x = 250
         st.session_state.y = 250
         st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
         st.session_state.itens = []
-        st.session_state.cooldown = True
-        st.session_state.tempo = 0
-        st.session_state.ultima_atualizacao = time.time()
+        st.session_state.cooldown = True  # jogo ativo
+        st.session_state.tempo = 0  # tempo em segundos
 
         ITEM_IMG = "https://i.imgur.com/i23vEr2.png"
+
+        # gerar 5 itens aleatórios
         for _ in range(5):
             st.session_state.itens.append({
                 "x": random.randint(0, 450),
@@ -777,14 +777,14 @@ elif menu == "Jogo":
                 "img": ITEM_IMG
             })
 
-    # ======= CONFIGURAÇÃO =======
+    # ======= CONFIGURAÇÃO DO CENÁRIO =======
     CENARIO_LARGURA = 500
     CENARIO_ALTURA = 500
     PERSONAGEM_TAM = 50
     ITEM_TAM = 30
     PASSO = 20
 
-    # ======= FUNÇÕES =======
+    # ======= FUNÇÕES DE MOVIMENTO =======
     def coletar_item():
         novas_posicoes = []
         for item in st.session_state.itens:
@@ -794,10 +794,13 @@ elif menu == "Jogo":
                 st.session_state.y < item["y"] + ITEM_TAM and
                 st.session_state.y + PERSONAGEM_TAM > item["y"]
             ):
+                # coletou item, não adiciona à lista
                 pass
             else:
                 novas_posicoes.append(item)
         st.session_state.itens = novas_posicoes
+
+        # se coletou todos os itens, encerra cooldown
         if len(st.session_state.itens) == 0:
             st.session_state.cooldown = False
 
@@ -806,92 +809,98 @@ elif menu == "Jogo":
             st.session_state.y = max(0, st.session_state.y - PASSO)
             st.session_state.img = "https://i.imgur.com/csPu1r4.png"
             coletar_item()
+            st.session_state.tempo += 1
 
     def move_down():
         if st.session_state.cooldown:
             st.session_state.y = min(CENARIO_ALTURA - PERSONAGEM_TAM, st.session_state.y + PASSO)
             st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
             coletar_item()
+            st.session_state.tempo += 1
 
     def move_left():
         if st.session_state.cooldown:
             st.session_state.x = max(0, st.session_state.x - PASSO)
             st.session_state.img = "https://i.imgur.com/v8h0N4j.png"
             coletar_item()
+            st.session_state.tempo += 1
 
     def move_right():
         if st.session_state.cooldown:
             st.session_state.x = min(CENARIO_LARGURA - PERSONAGEM_TAM, st.session_state.x + PASSO)
             st.session_state.img = "https://i.imgur.com/BSAbZic.png"
             coletar_item()
-
-    # ======= TIMER =======
-    if st.session_state.cooldown:
-        agora = time.time()
-        delta = agora - st.session_state.ultima_atualizacao
-        if delta >= 1:
-            st.session_state.tempo += int(delta)
-            st.session_state.ultima_atualizacao = agora
-        # Atualização controlada
-        placeholder = st.empty()
-        with placeholder:
-            time.sleep(1)
-            st.experimental_rerun()
+            st.session_state.tempo += 1
 
     # ======= ESTILO =======
-    st.markdown(f"""
-    <style>
-    .cenario {{
-        background-color: #808080;
-        width: {CENARIO_LARGURA}px;
-        height: {CENARIO_ALTURA}px;
-        position: relative;
-        margin: auto;
-        border: 3px solid black;
-    }}
-    .personagem {{
-        position: absolute;
-        transition: all 0.2s;
-    }}
-    .item {{
-        position: absolute;
-    }}
-    </style>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        f"""
+        <style>
+        .cenario {{
+            background-color: #808080;
+            width: {CENARIO_LARGURA}px;
+            height: {CENARIO_ALTURA}px;
+            position: relative;
+            margin: auto;
+            border: 3px solid black;
+        }}
+        .personagem {{
+            position: absolute;
+            transition: all 0.2s;
+        }}
+        .item {{
+            position: absolute;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
     # ======= LAYOUT =======
-    col1, col2 = st.columns([3,1])
+    col1, col2 = st.columns([3, 1])
 
-    # Cenário
+    # Cenário à esquerda
     with col1:
         itens_html = ""
         for item in st.session_state.itens:
             itens_html += f'<img class="item" src="{item["img"]}" style="left:{item["x"]}px; top:{item["y"]}px;" width="{ITEM_TAM}">'
-        st.markdown(f"""
-        <div class="cenario">
-            <img src="{st.session_state.img}" 
-                class="personagem" 
-                style="left:{st.session_state.x}px; top:{st.session_state.y}px;" 
-                width="{PERSONAGEM_TAM}">
-            {itens_html}
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(
+            f"""
+            <div class="cenario">
+                <img src="{st.session_state.img}" 
+                    class="personagem" 
+                    style="left:{st.session_state.x}px; top:{st.session_state.y}px;" 
+                    width="{PERSONAGEM_TAM}">
+                {itens_html}
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
-    # Controles
+    # Controles e contador de tempo à direita
     with col2:
         st.write("### Controles")
-        col_top, _, col_top_right = st.columns([1,1,1])
-        with col_top: st.button("⬆️", on_click=move_up)
-        col_left, col_middle, col_right = st.columns([1,1,1])
-        with col_left: st.button("⬅️", on_click=move_left)
-        with col_middle: st.button("⬇️", on_click=move_down)
-        with col_right: st.button("➡️", on_click=move_right)
 
-        # Formatar tempo
+        # Linha de cima
+        col_top, _, col_top_right = st.columns([1,1,1])
+        with col_top:
+            st.button("⬆️", on_click=move_up)
+
+        # Linha do meio
+        col_left, col_middle, col_right = st.columns([1,1,1])
+        with col_left:
+            st.button("⬅️", on_click=move_left)
+        with col_middle:
+            st.button("⬇️", on_click=move_down)
+        with col_right:
+            st.button("➡️", on_click=move_right)
+
+        # Formatar tempo em hh:mm:ss
         horas = st.session_state.tempo // 3600
         minutos = (st.session_state.tempo % 3600) // 60
         segundos = st.session_state.tempo % 60
         st.markdown(f"### Tempo: {horas:02d}:{minutos:02d}:{segundos:02d}")
 
+        # Mensagem de fim de jogo
         if not st.session_state.cooldown:
             st.success(f"🎉 Você coletou todos os itens em {horas:02d}:{minutos:02d}:{segundos:02d}!")
