@@ -750,6 +750,6 @@ elif menu == "Calendario ETER":
     # Projeto 1
     col1, col2 = st.columns([1,9])
     with col1:
-        st.image("https://i.imgur.com/AQ6bv9Q.png", width=900)
+        st.image("https://i.imgur.com/AQ6bv9Q.png", width=1500)
     with col2:
-        st.markdown("### Calendario ETER 📰")
+        st.write("### Calendario ETER 📰")
