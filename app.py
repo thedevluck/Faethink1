@@ -756,20 +756,25 @@ elif menu == "Calendario ETER":
     with col2:
         st.write(" ")
 
-
 elif menu == "Jogo":
-    # ======= CONFIG INICIAL =======
+    # ======= INICIALIZAÇÃO DO JOGO =======
     if "x" not in st.session_state:
         st.session_state.x = 250
         st.session_state.y = 250
-        st.session_state.img = "https://i.imgur.com/dzTWFvq.png"  # personagem inicial (baixo)
+        st.session_state.img = "https://i.imgur.com/dzTWFvq.png"  # personagem inicial
         st.session_state.score = 0
-        ITEM_IMG = "https://i.imgur.com/0YQG4Yn.png"  # imagem dos itens
-        # Posições de 5 itens aleatórios
-        st.session_state.itens = [
-            {"x": random.randint(0, 450), "y": random.randint(0, 450), "img": ITEM_IMG}
-            for _ in range(5)
-        ]
+        st.session_state.itens = []  # lista de itens
+
+        # imagem dos itens
+        ITEM_IMG = "https://i.imgur.com/0YQG4Yn.png"
+
+        # gerar 5 itens aleatórios
+        for _ in range(5):
+            st.session_state.itens.append({
+                "x": random.randint(0, 450),
+                "y": random.randint(0, 450),
+                "img": ITEM_IMG
+            })
 
     # ======= CONFIGURAÇÃO DO CENÁRIO =======
     CENARIO_LARGURA = 500
@@ -782,6 +787,7 @@ elif menu == "Jogo":
     def coletar_item():
         novas_posicoes = []
         for item in st.session_state.itens:
+            # colisão simples
             if (
                 st.session_state.x < item["x"] + ITEM_TAM and
                 st.session_state.x + PERSONAGEM_TAM > item["x"] and
