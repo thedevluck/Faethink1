@@ -752,3 +752,4 @@ elif menu == "Calendario ETER":
     with col1:
         st.image("https://i.imgur.com/AQ6bv9Q.png", width=1500)
     with col2:
+        st.write("### Calendario ETER 📰")
