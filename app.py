@@ -1,7 +1,6 @@
 import streamlit as st
 import unicodedata
 import re
-import random
 
 st.set_page_config(page_title="FaeThink", page_icon="🎓", layout="wide")
 def normalizar_texto(texto: str) -> str:
@@ -745,6 +744,18 @@ elif menu == "Projetos da Escola":
         st.markdown("[📸 Instagram](https://www.instagram.com/gremio.vivaz/)")
 
 # -------- Calendario escolar --------
+elif menu == "Calendario ETER":
+    st.markdown("## 📅 Calendario")
+    st.write("Abaixo temos o calendario da ETER desse ano")
+    # Projeto 1
+    col1, col2 = st.columns([9,1])
+    with col1:
+        st.image("https://i.imgur.com/AQ6bv9Q.png", width=1500)
+        st.divider()
+    with col2:
+        st.write(" ")
+
+
 elif menu == "Jogo":
     # ======= CONFIG INICIAL =======
     if "x" not in st.session_state:
