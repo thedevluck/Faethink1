@@ -749,7 +749,7 @@ elif menu == "Jogo":
     if "x" not in st.session_state:
         st.session_state.x = 250
         st.session_state.y = 250
-        st.session_state.img = "down.png"  # imagem inicial (S)
+        st.session_state.img = "https://i.imgur.com/dzTWFvq.png"  # imagem inicial (S)
 
     # ======= FUNÇÕES DE MOVIMENTO =======
     def move_up():
@@ -809,7 +809,7 @@ elif menu == "Jogo":
     # Botões na direita
     with col2:
         st.write("### Controles")
-        st.button("⬆️", on_click=move_up)
+        st.button("         ⬆️", on_click=move_up)
         col_a, col_b, col_c = st.columns([1,1,1])
         with col_a:
             st.button("⬅️", on_click=move_left)
