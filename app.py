@@ -770,7 +770,6 @@ elif menu == "Jogo":
         st.session_state.ultima_atualizacao = time.time()
 
         ITEM_IMG = "https://i.imgur.com/i23vEr2.png"
-
         for _ in range(5):
             st.session_state.itens.append({
                 "x": random.randint(0, 450),
@@ -785,7 +784,7 @@ elif menu == "Jogo":
     ITEM_TAM = 30
     PASSO = 20
 
-    # ======= FUNÇÕES DE MOVIMENTO =======
+    # ======= FUNÇÕES =======
     def coletar_item():
         novas_posicoes = []
         for item in st.session_state.itens:
@@ -834,9 +833,7 @@ elif menu == "Jogo":
         if delta >= 1:
             st.session_state.tempo += int(delta)
             st.session_state.ultima_atualizacao = agora
-        # Atualização automática sem loop infinito
-        st.experimental_set_query_params(update=int(time.time()))
-        st.experimental_rerun()
+            st.experimental_rerun()  # apenas isso já atualiza o timer
 
     # ======= ESTILO =======
     st.markdown(f"""
