@@ -523,7 +523,7 @@ base_conhecimento = [
     },
     {
         "keywords": ["datas", "provas", "trabalhos", "quando"],
-        "resposta": "Datas são divulgadas em sala pelos professores, no plano de ensino, no calendário acadêmico da unidade, no site/portal da FAETEC ou em murais físicos."
+        "resposta": "Datas são divulgadas em sala pelos professores, no plano de ensino, no calendário acadêmico da unidade ou em murais físicos."
     },
     {
         "keywords": ["perdi", "prova", "falta", "segunda chamada"],
