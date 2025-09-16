@@ -583,7 +583,7 @@ base_conhecimento = [
     },
     {
         "keywords": ["mudanca", "calendario", "escolar", "alteracao"],
-        "resposta": "Mudanças de calendário são divulgadas oficialmente pela FAETEC em comunicados em grupos de whatsapp, murais ou portal da unidade."
+        "resposta": "Mudanças de calendário são divulgadas oficialmente pela FAETEC em comunicados em grupos de whatsapp, ou em murais fisicos."
     },
     {
         "keywords": ["cancelamento", "aula", "evento"],
