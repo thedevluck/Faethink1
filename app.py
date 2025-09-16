@@ -230,10 +230,6 @@ base_conhecimento = [
         "resposta": "Sim. A Faetec revisa periodicamente sua oferta de cursos de acordo com a demanda de mercado."
     },
     {
-        "keywords": ["documentos", "matricula", "necessarios", "requisitos"],
-        "resposta": "Para matrícula, são exigidos: certidão de nascimento ou casamento, RG, CPF, fotos 3x4, título de eleitor (maiores de 18 anos), certificado de reservista (homens), diploma ou certificado do Ensino Médio e histórico escolar."
-    },
-    {
         "keywords": ["cnh", "carteira de motorista"],
         "resposta": "Sim. A CNH pode ser usada como documento oficial de identificação."
     },
@@ -504,6 +500,10 @@ base_conhecimento = [
     {
         "keywords": ["perdi", "comprovante", "matricula"],
         "resposta": "Com a Secretaria Acadêmica. Este setor pode emitir uma segunda via do comprovante de matrícula ou fornecer uma declaração oficial confirmando sua matrícula, mediante apresentação de documentos de identificação."
+    },
+    {
+        "keywords": ["documentos", "matricula", "necessarios", "requisitos"],
+        "resposta": "Para matrícula, são exigidos: certidão de nascimento ou casamento, RG, CPF, fotos 3x4, título de eleitor (maiores de 18 anos), certificado de reservista (homens), diploma ou certificado do Ensino Médio e histórico escolar."
     },
     {
         "keywords": ["segunda via", "documentos", "historico", "certificado", "declaracao"],
