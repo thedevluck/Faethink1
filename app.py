@@ -1,6 +1,7 @@
 import streamlit as st
 import unicodedata
 import re
+import random
 
 st.set_page_config(page_title="FaeThink", page_icon="🎓", layout="wide")
 def normalizar_texto(texto: str) -> str:
@@ -749,30 +750,67 @@ elif menu == "Jogo":
     if "x" not in st.session_state:
         st.session_state.x = 250
         st.session_state.y = 250
-        st.session_state.img = "https://i.imgur.com/dzTWFvq.png"  # imagem inicial (S)
+        st.session_state.img = "https://i.imgur.com/dzTWFvq.png"  # player (baixo)
+    
+    if "ponto" not in st.session_state:
+        st.session_state.ponto = [random.randint(0, 450), random.randint(0, 450)]
+    
+    if "inimigo" not in st.session_state:
+        st.session_state.inimigo = [200, 200]
+        st.session_state.inimigo_img = "https://i.imgur.com/dzTWFvq.png"  # inimigo (baixo)
 
     # ======= TAMANHO DO CENÁRIO =======
     CENARIO_LARGURA = 500
     CENARIO_ALTURA = 500
     PERSONAGEM_TAM = 50
-    PASSO = 20  # quantos pixels anda por movimento
+    PASSO = 20  
 
     # ======= FUNÇÕES DE MOVIMENTO COM COLISÃO =======
     def move_up():
         st.session_state.y = max(0, st.session_state.y - PASSO)
         st.session_state.img = "https://i.imgur.com/csPu1r4.png"
+        mover_inimigo()
 
     def move_down():
         st.session_state.y = min(CENARIO_ALTURA - PERSONAGEM_TAM, st.session_state.y + PASSO)
         st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
+        mover_inimigo()
 
     def move_left():
         st.session_state.x = max(0, st.session_state.x - PASSO)
         st.session_state.img = "https://i.imgur.com/v8h0N4j.png"
+        mover_inimigo()
 
     def move_right():
         st.session_state.x = min(CENARIO_LARGURA - PERSONAGEM_TAM, st.session_state.x + PASSO)
         st.session_state.img = "https://i.imgur.com/BSAbZic.png"
+        mover_inimigo()
+
+    # ======= MOVIMENTO DO INIMIGO (segue o player) =======
+    def mover_inimigo():
+        px, py = st.session_state.x, st.session_state.y
+        ix, iy = st.session_state.inimigo
+
+        if ix < px:
+            st.session_state.inimigo[0] += PASSO
+            st.session_state.inimigo_img = "https://i.imgur.com/BSAbZic.png"
+        elif ix > px:
+            st.session_state.inimigo[0] -= PASSO
+            st.session_state.inimigo_img = "https://i.imgur.com/v8h0N4j.png"
+
+        if iy < py:
+            st.session_state.inimigo[1] += PASSO
+            st.session_state.inimigo_img = "https://i.imgur.com/dzTWFvq.png"
+        elif iy > py:
+            st.session_state.inimigo[1] -= PASSO
+            st.session_state.inimigo_img = "https://i.imgur.com/csPu1r4.png"
+
+    # ======= CHECAR SE PEGOU O PONTO =======
+    def checar_ponto():
+        px, py = st.session_state.x, st.session_state.y
+        ex, ey = st.session_state.ponto
+        if abs(px - ex) < 30 and abs(py - ey) < 30:  # colisão
+            st.session_state.ponto = [random.randint(0, 450), random.randint(0, 450)]
 
     # ======= ESTILO DO CENÁRIO =======
     st.markdown(
@@ -800,13 +838,27 @@ elif menu == "Jogo":
 
     # Cenário na esquerda
     with col1:
+        checar_ponto()
         st.markdown(
             f"""
             <div class="cenario">
+                <!-- Ponto -->
+                <img src="https://i.imgur.com/fQj3T4C.png" 
+                     class="personagem" 
+                     style="left:{st.session_state.ponto[0]}px; top:{st.session_state.ponto[1]}px;" 
+                     width="30">
+
+                <!-- Player -->
                 <img src="{st.session_state.img}" 
-                    class="personagem" 
-                    style="left:{st.session_state.x}px; top:{st.session_state.y}px;" 
-                    width="{PERSONAGEM_TAM}">
+                     class="personagem" 
+                     style="left:{st.session_state.x}px; top:{st.session_state.y}px;" 
+                     width="{PERSONAGEM_TAM}">
+
+                <!-- Inimigo -->
+                <img src="{st.session_state.inimigo_img}" 
+                     class="personagem" 
+                     style="left:{st.session_state.inimigo[0]}px; top:{st.session_state.inimigo[1]}px;" 
+                     width="{PERSONAGEM_TAM}">
             </div>
             """,
             unsafe_allow_html=True
