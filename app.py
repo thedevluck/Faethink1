@@ -763,10 +763,9 @@ elif menu == "Jogo":
         st.session_state.x = 250
         st.session_state.y = 250
         st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
+        st.session_state.contador = 0  # contador de itens coletados
         st.session_state.itens = []
         st.session_state.cooldown = True  # jogo ativo
-        st.session_state.tempo = 0  # tempo em segundos
-
         ITEM_IMG = "https://i.imgur.com/i23vEr2.png"
 
         # gerar 5 itens aleatórios
@@ -794,8 +793,7 @@ elif menu == "Jogo":
                 st.session_state.y < item["y"] + ITEM_TAM and
                 st.session_state.y + PERSONAGEM_TAM > item["y"]
             ):
-                # coletou item, não adiciona à lista
-                pass
+                st.session_state.contador += 1  # aumenta o contador
             else:
                 novas_posicoes.append(item)
         st.session_state.itens = novas_posicoes
@@ -809,28 +807,24 @@ elif menu == "Jogo":
             st.session_state.y = max(0, st.session_state.y - PASSO)
             st.session_state.img = "https://i.imgur.com/csPu1r4.png"
             coletar_item()
-            st.session_state.tempo += 1
 
     def move_down():
         if st.session_state.cooldown:
             st.session_state.y = min(CENARIO_ALTURA - PERSONAGEM_TAM, st.session_state.y + PASSO)
             st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
             coletar_item()
-            st.session_state.tempo += 1
 
     def move_left():
         if st.session_state.cooldown:
             st.session_state.x = max(0, st.session_state.x - PASSO)
             st.session_state.img = "https://i.imgur.com/v8h0N4j.png"
             coletar_item()
-            st.session_state.tempo += 1
 
     def move_right():
         if st.session_state.cooldown:
             st.session_state.x = min(CENARIO_LARGURA - PERSONAGEM_TAM, st.session_state.x + PASSO)
             st.session_state.img = "https://i.imgur.com/BSAbZic.png"
             coletar_item()
-            st.session_state.tempo += 1
 
     # ======= ESTILO =======
     st.markdown(
@@ -877,7 +871,7 @@ elif menu == "Jogo":
             unsafe_allow_html=True
         )
 
-    # Controles e contador de tempo à direita
+    # Controles e contador à direita
     with col2:
         st.write("### Controles")
 
@@ -895,12 +889,8 @@ elif menu == "Jogo":
         with col_right:
             st.button("➡️", on_click=move_right)
 
-        # Formatar tempo em hh:mm:ss
-        horas = st.session_state.tempo // 3600
-        minutos = (st.session_state.tempo % 3600) // 60
-        segundos = st.session_state.tempo % 60
-        st.markdown(f"### Tempo: {horas:02d}:{minutos:02d}:{segundos:02d}")
+        st.markdown(f"### Itens coletados: {st.session_state.contador}/5")
 
         # Mensagem de fim de jogo
         if not st.session_state.cooldown:
-            st.success(f"🎉 Você coletou todos os itens em {horas:02d}:{minutos:02d}:{segundos:02d}!")
+            st.success("🎉 Você coletou todos os itens! O jogo acabou!")
