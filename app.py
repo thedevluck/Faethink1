@@ -757,73 +757,71 @@ elif menu == "Calendario ETER":
 
 
 elif menu == "Jogo":
-     st.set_page_config(page_title="Mini Jogo", page_icon="🎮", layout="centered")
+    # ======= CONFIG INICIAL =======
+    if "x" not in st.session_state:
+        st.session_state.x = 250
+        st.session_state.y = 250
+        st.session_state.img = "down.png"  # imagem inicial (S)
 
-# ======= CONFIG INICIAL =======
-if "x" not in st.session_state:
-    st.session_state.x = 250
-    st.session_state.y = 250
-    st.session_state.img = "down.png"  # imagem inicial (S)
+    # ======= FUNÇÕES DE MOVIMENTO =======
+    def move_up():
+        st.session_state.y -= 20
+        st.session_state.img = "up.png"
 
-# ======= FUNÇÕES DE MOVIMENTO =======
-def move_up():
-    st.session_state.y -= 20
-    st.session_state.img = "up.png"
+    def move_down():
+        st.session_state.y += 20
+        st.session_state.img = "down.png"
 
-def move_down():
-    st.session_state.y += 20
-    st.session_state.img = "down.png"
+    def move_left():
+        st.session_state.x -= 20
+        st.session_state.img = "left.png"
 
-def move_left():
-    st.session_state.x -= 20
-    st.session_state.img = "left.png"
+    def move_right():
+        st.session_state.x += 20
+        st.session_state.img = "right.png"
 
-def move_right():
-    st.session_state.x += 20
-    st.session_state.img = "right.png"
+    # ======= CENÁRIO =======
+    st.markdown(
+        """
+        <style>
+        .cenario {
+            background-color: #808080; /* cinza */
+            width: 500px;
+            height: 500px;
+            position: relative;
+            margin: auto;
+            border: 3px solid black;
+        }
+        .personagem {
+            position: absolute;
+            transition: all 0.2s;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
-# ======= CENÁRIO =======
-st.markdown(
-    """
-    <style>
-    .cenario {
-        background-color: #808080; /* cinza */
-        width: 500px;
-        height: 500px;
-        position: relative;
-        margin: auto;
-        border: 3px solid black;
-    }
-    .personagem {
-        position: absolute;
-        transition: all 0.2s;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+    # ======= BOTÕES DE CONTROLE =======
+    col1, col2, col3 = st.columns([1,1,1])
+    with col2:
+        st.button("⬆️", on_click=move_up)
+    col1, col2, col3 = st.columns([1,1,1])
+    with col1:
+        st.button("⬅️", on_click=move_left)
+    with col2:
+        st.button("⬇️", on_click=move_down)
+    with col3:
+        st.button("➡️", on_click=move_right)
 
-# ======= BOTÕES DE CONTROLE =======
-col1, col2, col3 = st.columns([1,1,1])
-with col2:
-    st.button("⬆️", on_click=move_up)
-col1, col2, col3 = st.columns([1,1,1])
-with col1:
-    st.button("⬅️", on_click=move_left)
-with col2:
-    st.button("⬇️", on_click=move_down)
-with col3:
-    st.button("➡️", on_click=move_right)
-
-# ======= MOSTRAR PERSONAGEM =======
-st.markdown(
-    f"""
-    <div class="cenario">
-        <img src="{st.session_state.img}" 
-             class="personagem" 
-             style="left:{st.session_state.x}px; top:{st.session_state.y}px;" 
-             width="50">
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+    # ======= MOSTRAR PERSONAGEM =======
+    st.markdown(
+        f"""
+        <div class="cenario">
+            <img src="{st.session_state.img}" 
+                class="personagem" 
+                style="left:{st.session_state.x}px; top:{st.session_state.y}px;" 
+                width="50">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
