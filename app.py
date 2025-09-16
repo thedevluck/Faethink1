@@ -761,11 +761,10 @@ elif menu == "Jogo":
     if "x" not in st.session_state:
         st.session_state.x = 250
         st.session_state.y = 250
-        st.session_state.img = "https://i.imgur.com/dzTWFvq.png"  # personagem inicial
+        st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
         st.session_state.score = 0
-        st.session_state.itens = []  # lista de itens
-
-        # imagem dos itens
+        st.session_state.itens = []
+        st.session_state.cooldown = True  # jogo ativo
         ITEM_IMG = "https://i.imgur.com/0YQG4Yn.png"
 
         # gerar 5 itens aleatórios
@@ -781,13 +780,12 @@ elif menu == "Jogo":
     CENARIO_ALTURA = 500
     PERSONAGEM_TAM = 50
     ITEM_TAM = 30
-    PASSO = 20  # pixels por movimento
+    PASSO = 20
 
-    # ======= FUNÇÕES DE MOVIMENTO COM COLISÃO =======
+    # ======= FUNÇÕES DE MOVIMENTO =======
     def coletar_item():
         novas_posicoes = []
         for item in st.session_state.itens:
-            # colisão simples
             if (
                 st.session_state.x < item["x"] + ITEM_TAM and
                 st.session_state.x + PERSONAGEM_TAM > item["x"] and
@@ -799,25 +797,33 @@ elif menu == "Jogo":
                 novas_posicoes.append(item)
         st.session_state.itens = novas_posicoes
 
+        # se coletou todos os itens, encerra cooldown
+        if len(st.session_state.itens) == 0:
+            st.session_state.cooldown = False
+
     def move_up():
-        st.session_state.y = max(0, st.session_state.y - PASSO)
-        st.session_state.img = "https://i.imgur.com/csPu1r4.png"
-        coletar_item()
+        if st.session_state.cooldown:
+            st.session_state.y = max(0, st.session_state.y - PASSO)
+            st.session_state.img = "https://i.imgur.com/csPu1r4.png"
+            coletar_item()
 
     def move_down():
-        st.session_state.y = min(CENARIO_ALTURA - PERSONAGEM_TAM, st.session_state.y + PASSO)
-        st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
-        coletar_item()
+        if st.session_state.cooldown:
+            st.session_state.y = min(CENARIO_ALTURA - PERSONAGEM_TAM, st.session_state.y + PASSO)
+            st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
+            coletar_item()
 
     def move_left():
-        st.session_state.x = max(0, st.session_state.x - PASSO)
-        st.session_state.img = "https://i.imgur.com/v8h0N4j.png"
-        coletar_item()
+        if st.session_state.cooldown:
+            st.session_state.x = max(0, st.session_state.x - PASSO)
+            st.session_state.img = "https://i.imgur.com/v8h0N4j.png"
+            coletar_item()
 
     def move_right():
-        st.session_state.x = min(CENARIO_LARGURA - PERSONAGEM_TAM, st.session_state.x + PASSO)
-        st.session_state.img = "https://i.imgur.com/BSAbZic.png"
-        coletar_item()
+        if st.session_state.cooldown:
+            st.session_state.x = min(CENARIO_LARGURA - PERSONAGEM_TAM, st.session_state.x + PASSO)
+            st.session_state.img = "https://i.imgur.com/BSAbZic.png"
+            coletar_item()
 
     # ======= ESTILO =======
     st.markdown(
@@ -868,12 +874,12 @@ elif menu == "Jogo":
     with col2:
         st.write("### Controles")
 
-        # Linha de cima: ⬆️
+        # Linha de cima
         col_top, _, col_top_right = st.columns([1,1,1])
         with col_top:
             st.button("⬆️", on_click=move_up)
 
-        # Linha do meio: ⬅️   ⬇️   ➡️
+        # Linha do meio
         col_left, col_middle, col_right = st.columns([1,1,1])
         with col_left:
             st.button("⬅️", on_click=move_left)
@@ -882,5 +888,8 @@ elif menu == "Jogo":
         with col_right:
             st.button("➡️", on_click=move_right)
 
-        # Pontuação
         st.markdown(f"### Pontos: {st.session_state.score}")
+
+        # Mensagem de fim de cooldown
+        if not st.session_state.cooldown:
+            st.success("🎉 Você coletou todos os itens!")
