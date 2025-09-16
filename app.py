@@ -763,9 +763,9 @@ elif menu == "Jogo":
         st.session_state.x = 130
         st.session_state.y = 130
         st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
-        st.session_state.contador = 0  # contador de itens coletados
+        st.session_state.contador = 0
         st.session_state.itens = []
-        st.session_state.cooldown = True  # jogo ativo
+        st.session_state.cooldown = True
         ITEM_IMG = "https://i.imgur.com/i23vEr2.png"
 
         # gerar 5 itens aleatórios
@@ -793,12 +793,11 @@ elif menu == "Jogo":
                 st.session_state.y < item["y"] + ITEM_TAM and
                 st.session_state.y + PERSONAGEM_TAM > item["y"]
             ):
-                st.session_state.contador += 1  # aumenta o contador
+                st.session_state.contador += 1
             else:
                 novas_posicoes.append(item)
         st.session_state.itens = novas_posicoes
 
-        # se coletou todos os itens, encerra cooldown
         if len(st.session_state.itens) == 0:
             st.session_state.cooldown = False
 
@@ -875,22 +874,28 @@ elif menu == "Jogo":
     with col2:
         st.write("### Controles")
 
-        # Linha de cima
-        st.button("⬆️", on_click=move_up, key="up")
+        # Linha de cima: botão para cima, centralizado
+        col_top_left, col_top_middle, col_top_right = st.columns([1,1,1])
+        with col_top_middle:
+            st.button("⬆️", on_click=move_up, key="up")
 
-        # Linha do meio (esquerda, espaço, direita)
-        col_left, col_middle, col_right = st.columns([1,0.5,1])
-        with col_left:
+        # Linha do meio: esquerda e direita
+        col_mid_left, col_mid_middle, col_mid_right = st.columns([1,1,1])
+        with col_mid_left:
             st.button("⬅️", on_click=move_left, key="left")
-        with col_middle:
+        with col_mid_middle:
             st.write("")  # espaço central
-        with col_right:
+        with col_mid_right:
             st.button("➡️", on_click=move_right, key="right")
 
-        # Linha de baixo
-        st.button("⬇️", on_click=move_down, key="down")
+        # Linha de baixo: botão para baixo, centralizado
+        col_bottom_left, col_bottom_middle, col_bottom_right = st.columns([1,1,1])
+        with col_bottom_middle:
+            st.button("⬇️", on_click=move_down, key="down")
 
+        # Contador de itens
         st.markdown(f"### Itens coletados: {st.session_state.contador}/5")
 
+        # Mensagem de fim de jogo
         if not st.session_state.cooldown:
             st.success("🎉 Você coletou todos os itens! O jogo acabou!")
