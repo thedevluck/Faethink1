@@ -1,6 +1,7 @@
 import streamlit as st
 import unicodedata
 import re
+import random
 
 st.set_page_config(page_title="FaeThink", page_icon="🎓", layout="wide")
 def normalizar_texto(texto: str) -> str:
@@ -761,37 +762,63 @@ elif menu == "Jogo":
     if "x" not in st.session_state:
         st.session_state.x = 250
         st.session_state.y = 250
-        st.session_state.img = "https://i.imgur.com/dzTWFvq.png"  # imagem inicial (S)
+        st.session_state.img = "https://i.imgur.com/dzTWFvq.png"  # personagem inicial (baixo)
+        st.session_state.score = 0
+        ITEM_IMG = "https://i.imgur.com/0YQG4Yn.png"  # imagem dos itens
+        # Posições de 5 itens aleatórios
+        st.session_state.itens = [
+            {"x": random.randint(0, 450), "y": random.randint(0, 450), "img": ITEM_IMG}
+            for _ in range(5)
+        ]
 
-    # ======= TAMANHO DO CENÁRIO =======
+    # ======= CONFIGURAÇÃO DO CENÁRIO =======
     CENARIO_LARGURA = 500
     CENARIO_ALTURA = 500
     PERSONAGEM_TAM = 50
-    PASSO = 20  # quantos pixels anda por movimento
+    ITEM_TAM = 30
+    PASSO = 20  # pixels por movimento
 
     # ======= FUNÇÕES DE MOVIMENTO COM COLISÃO =======
+    def coletar_item():
+        novas_posicoes = []
+        for item in st.session_state.itens:
+            if (
+                st.session_state.x < item["x"] + ITEM_TAM and
+                st.session_state.x + PERSONAGEM_TAM > item["x"] and
+                st.session_state.y < item["y"] + ITEM_TAM and
+                st.session_state.y + PERSONAGEM_TAM > item["y"]
+            ):
+                st.session_state.score += 1
+            else:
+                novas_posicoes.append(item)
+        st.session_state.itens = novas_posicoes
+
     def move_up():
         st.session_state.y = max(0, st.session_state.y - PASSO)
         st.session_state.img = "https://i.imgur.com/csPu1r4.png"
+        coletar_item()
 
     def move_down():
         st.session_state.y = min(CENARIO_ALTURA - PERSONAGEM_TAM, st.session_state.y + PASSO)
         st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
+        coletar_item()
 
     def move_left():
         st.session_state.x = max(0, st.session_state.x - PASSO)
         st.session_state.img = "https://i.imgur.com/v8h0N4j.png"
+        coletar_item()
 
     def move_right():
         st.session_state.x = min(CENARIO_LARGURA - PERSONAGEM_TAM, st.session_state.x + PASSO)
         st.session_state.img = "https://i.imgur.com/BSAbZic.png"
+        coletar_item()
 
-    # ======= ESTILO DO CENÁRIO =======
+    # ======= ESTILO =======
     st.markdown(
         f"""
         <style>
         .cenario {{
-            background-color: #808080; /* cinza */
+            background-color: #808080;
             width: {CENARIO_LARGURA}px;
             height: {CENARIO_ALTURA}px;
             position: relative;
@@ -802,16 +829,22 @@ elif menu == "Jogo":
             position: absolute;
             transition: all 0.2s;
         }}
+        .item {{
+            position: absolute;
+        }}
         </style>
         """,
         unsafe_allow_html=True
     )
 
-    # ======= DIVIDIR EM DUAS COLUNAS =======
+    # ======= LAYOUT =======
     col1, col2 = st.columns([3, 1])
 
-    # Cenário na esquerda
+    # Cenário à esquerda
     with col1:
+        itens_html = ""
+        for item in st.session_state.itens:
+            itens_html += f'<img class="item" src="{item["img"]}" style="left:{item["x"]}px; top:{item["y"]}px;" width="{ITEM_TAM}">'
         st.markdown(
             f"""
             <div class="cenario">
@@ -819,19 +852,29 @@ elif menu == "Jogo":
                     class="personagem" 
                     style="left:{st.session_state.x}px; top:{st.session_state.y}px;" 
                     width="{PERSONAGEM_TAM}">
+                {itens_html}
             </div>
             """,
             unsafe_allow_html=True
         )
 
-    # Botões na direita
+    # Controles e score à direita
     with col2:
         st.write("### Controles")
-        st.button("⬆️", on_click=move_up)
-        col_a, col_b, col_c = st.columns([1,1,1])
-        with col_a:
+
+        # Linha de cima: ⬆️
+        col_top, _, col_top_right = st.columns([1,1,1])
+        with col_top:
+            st.button("⬆️", on_click=move_up)
+
+        # Linha do meio: ⬅️   ⬇️   ➡️
+        col_left, col_middle, col_right = st.columns([1,1,1])
+        with col_left:
             st.button("⬅️", on_click=move_left)
-        with col_b:
+        with col_middle:
             st.button("⬇️", on_click=move_down)
-        with col_c:
+        with col_right:
             st.button("➡️", on_click=move_right)
+
+        # Pontuação
+        st.markdown(f"### Pontos: {st.session_state.score}")
