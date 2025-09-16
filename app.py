@@ -744,18 +744,6 @@ elif menu == "Projetos da Escola":
         st.markdown("[📸 Instagram](https://www.instagram.com/gremio.vivaz/)")
 
 # -------- Calendario escolar --------
-elif menu == "Calendario ETER":
-    st.markdown("## 📅 Calendario")
-    st.write("Abaixo temos o calendario da ETER desse ano")
-    # Projeto 1
-    col1, col2 = st.columns([9,1])
-    with col1:
-        st.image("https://i.imgur.com/AQ6bv9Q.png", width=1500)
-        st.divider()
-    with col2:
-        st.write(" ")
-
-
 elif menu == "Jogo":
     # ======= CONFIG INICIAL =======
     if "x" not in st.session_state:
@@ -766,21 +754,21 @@ elif menu == "Jogo":
     # ======= FUNÇÕES DE MOVIMENTO =======
     def move_up():
         st.session_state.y -= 20
-        st.session_state.img = "up.png"
+        st.session_state.img = "https://i.imgur.com/csPu1r4.png"
 
     def move_down():
         st.session_state.y += 20
-        st.session_state.img = "down.png"
+        st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
 
     def move_left():
         st.session_state.x -= 20
-        st.session_state.img = "left.png"
+        st.session_state.img = "https://i.imgur.com/v8h0N4j.png"
 
     def move_right():
         st.session_state.x += 20
-        st.session_state.img = "right.png"
+        st.session_state.img = "https://i.imgur.com/BSAbZic.png"
 
-    # ======= CENÁRIO =======
+    # ======= ESTILO DO CENÁRIO =======
     st.markdown(
         """
         <style>
@@ -801,27 +789,31 @@ elif menu == "Jogo":
         unsafe_allow_html=True
     )
 
-    # ======= BOTÕES DE CONTROLE =======
-    col1, col2, col3 = st.columns([1,1,1])
-    with col2:
-        st.button("⬆️", on_click=move_up)
-    col1, col2, col3 = st.columns([1,1,1])
-    with col1:
-        st.button("⬅️", on_click=move_left)
-    with col2:
-        st.button("⬇️", on_click=move_down)
-    with col3:
-        st.button("➡️", on_click=move_right)
+    # ======= DIVIDIR EM DUAS COLUNAS =======
+    col1, col2 = st.columns([3, 1])
 
-    # ======= MOSTRAR PERSONAGEM =======
-    st.markdown(
-        f"""
-        <div class="cenario">
-            <img src="{st.session_state.img}" 
-                class="personagem" 
-                style="left:{st.session_state.x}px; top:{st.session_state.y}px;" 
-                width="50">
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    # Cenário na esquerda
+    with col1:
+        st.markdown(
+            f"""
+            <div class="cenario">
+                <img src="{st.session_state.img}" 
+                    class="personagem" 
+                    style="left:{st.session_state.x}px; top:{st.session_state.y}px;" 
+                    width="50">
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    # Botões na direita
+    with col2:
+        st.write("### Controles")
+        st.button("⬆️", on_click=move_up)
+        col_a, col_b, col_c = st.columns([1,1,1])
+        with col_a:
+            st.button("⬅️", on_click=move_left)
+        with col_b:
+            st.button("⬇️", on_click=move_down)
+        with col_c:
+            st.button("➡️", on_click=move_right)
