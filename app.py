@@ -106,7 +106,7 @@ st.markdown("<h1 class='titulo-gradient'>FaeThink</h1>", unsafe_allow_html=True)
 st.markdown("<p class='subtitulo'>Seu assistente escolar da FAETEC com muito carinho 💙✨</p>", unsafe_allow_html=True)
 
 # Sidebar menu
-menu = st.sidebar.radio("📌 Navegação", ["Chatbot", "Sobre o Projeto", "Projetos da Escola"])
+menu = st.sidebar.radio("📌 Navegação", ["Chatbot", "Sobre o Projeto", "Projetos da Escola", "Calendario ETER"])
 
 base_conhecimento = [
     {
