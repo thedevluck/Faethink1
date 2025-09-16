@@ -747,3 +747,10 @@ elif menu == "Projetos da Escola":
 elif menu == "Calendario ETER":
     st.markdown("## 📅 Calendario")
     st.write("Abaixo temos o calendario da ETER desse ano")
+    # Projeto 1
+    col1, col2 = st.columns([1,5])
+    with col1:
+        st.image("https://i.imgur.com/N2DeKr9.png", width=200)
+    with col2:
+        st.markdown("### Jornal A Voz do Republica 📰")
+        st.markdown("[📸 Instagram](https://www.instagram.com/avoz_republica/)")
