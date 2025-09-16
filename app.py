@@ -771,8 +771,8 @@ elif menu == "Jogo":
         # gerar 5 itens aleatórios
         for _ in range(5):
             st.session_state.itens.append({
-                "x": random.randint(0, 450),
-                "y": random.randint(0, 450),
+                "x": random.randint(0, 250),
+                "y": random.randint(0, 250),
                 "img": ITEM_IMG
             })
 
