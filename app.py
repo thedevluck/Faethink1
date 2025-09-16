@@ -493,11 +493,11 @@ base_conhecimento = [
     },
     {
         "keywords": ["solicito", "antigo"],
-        "resposta": "Faça uma solicitação formal à Secretaria Acadêmica, informando: seu nome completo, matrícula, curso/turma e o período do boletim que você não recebeu. Pode ser necessário preencher um requerimento (presencial ou digital) e aguardar o prazo interno para emissão."
+        "resposta": "Faça uma solicitação formal à Secretaria Acadêmica, informando: seu nome completo, matrícula, curso/turma e o período do boletim que você não recebeu."
     },
     {
         "keywords": ["pego"],
-        "resposta": "Faça uma solicitação formal à Secretaria Acadêmica, informando: seu nome completo, matrícula, curso/turma e o período do boletim que você não recebeu. Pode ser necessário preencher um requerimento (presencial ou digital) e aguardar o prazo interno para emissão."
+        "resposta": "Va até Secretaria Acadêmica, informando: seu nome completo, matrícula, curso/turma e o período do boletim que você deseja."
     },
     {
         "keywords": ["documentos", "matricula", "necessarios", "requisitos"],
