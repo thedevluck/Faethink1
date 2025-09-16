@@ -745,120 +745,78 @@ elif menu == "Projetos da Escola":
         st.markdown("### Gremio Vivaz 💫")
         st.markdown("[📸 Instagram](https://www.instagram.com/gremio.vivaz/)")
 
+# -------- Calendario escolar --------
 elif menu == "Jogo":
-    # ====== Configuração inicial do jogo ======
+    # ======= CONFIG INICIAL =======
     if "x" not in st.session_state:
         st.session_state.x = 250
         st.session_state.y = 250
-        st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
-        st.session_state.inimigos = []  # lista de inimigos
-        st.session_state.vivo = True
-        st.session_state.tempo_inicio = time.time()
-        st.session_state.pontos = 0
-        st.session_state.ultimo_spawn = time.time()
+        st.session_state.img = "https://i.imgur.com/dzTWFvq.png"  # imagem inicial (S)
 
+    # ======= TAMANHO DO CENÁRIO =======
     CENARIO_LARGURA = 500
     CENARIO_ALTURA = 500
     PERSONAGEM_TAM = 50
-    PASSO = 20
+    PASSO = 20  # quantos pixels anda por movimento
 
-    # ====== Funções de movimento com colisão ======
+    # ======= FUNÇÕES DE MOVIMENTO COM COLISÃO =======
     def move_up():
-        if st.session_state.vivo:
-            st.session_state.y = max(0, st.session_state.y - PASSO)
-            st.session_state.img = "https://i.imgur.com/csPu1r4.png"
+        st.session_state.y = max(0, st.session_state.y - PASSO)
+        st.session_state.img = "https://i.imgur.com/csPu1r4.png"
 
     def move_down():
-        if st.session_state.vivo:
-            st.session_state.y = min(CENARIO_ALTURA - PERSONAGEM_TAM, st.session_state.y + PASSO)
-            st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
+        st.session_state.y = min(CENARIO_ALTURA - PERSONAGEM_TAM, st.session_state.y + PASSO)
+        st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
 
     def move_left():
-        if st.session_state.vivo:
-            st.session_state.x = max(0, st.session_state.x - PASSO)
-            st.session_state.img = "https://i.imgur.com/v8h0N4j.png"
+        st.session_state.x = max(0, st.session_state.x - PASSO)
+        st.session_state.img = "https://i.imgur.com/v8h0N4j.png"
 
     def move_right():
-        if st.session_state.vivo:
-            st.session_state.x = min(CENARIO_LARGURA - PERSONAGEM_TAM, st.session_state.x + PASSO)
-            st.session_state.img = "https://i.imgur.com/BSAbZic.png"
+        st.session_state.x = min(CENARIO_LARGURA - PERSONAGEM_TAM, st.session_state.x + PASSO)
+        st.session_state.img = "https://i.imgur.com/BSAbZic.png"
 
-    # ====== Criar inimigos a cada minuto ======
-    def spawn_inimigos():
-        agora = time.time()
-        if agora - st.session_state.ultimo_spawn >= 60:  # 1 minuto
-            novos_inimigos = []
-            for _ in range(len(st.session_state.inimigos) or 1):
-                inimigo_x = random.randint(0, CENARIO_LARGURA - PERSONAGEM_TAM)
-                inimigo_y = random.randint(0, CENARIO_ALTURA - PERSONAGEM_TAM)
-                novos_inimigos.append({"x": inimigo_x, "y": inimigo_y})
-            st.session_state.inimigos.extend(novos_inimigos)
-            st.session_state.ultimo_spawn = agora
-
-    # ====== Checar colisão ======
-    def checar_colisao():
-        for inimigo in st.session_state.inimigos:
-            dx = abs(st.session_state.x - inimigo["x"])
-            dy = abs(st.session_state.y - inimigo["y"])
-            if dx < PERSONAGEM_TAM and dy < PERSONAGEM_TAM:
-                st.session_state.vivo = False
-
-    # ====== Atualizar pontuação ======
-    def atualizar_pontos():
-        if st.session_state.vivo:
-            st.session_state.pontos = int(time.time() - st.session_state.tempo_inicio)
-
-    # ====== Resetar jogo ======
-    def reset_jogo():
-        st.session_state.x = 250
-        st.session_state.y = 250
-        st.session_state.img = "https://i.imgur.com/dzTWFvq.png"
-        st.session_state.inimigos = []
-        st.session_state.vivo = True
-        st.session_state.tempo_inicio = time.time()
-        st.session_state.pontos = 0
-        st.session_state.ultimo_spawn = time.time()
-
-    # ====== Spawn e pontuação ======
-    spawn_inimigos()
-    checar_colisao()
-    atualizar_pontos()
-
-    # ====== Layout do jogo ======
+    # ======= ESTILO DO CENÁRIO =======
     st.markdown(
-        """
+        f"""
         <style>
-        .cenario {
-            background-color: #808080;
-            width: 500px;
-            height: 500px;
+        .cenario {{
+            background-color: #808080; /* cinza */
+            width: {CENARIO_LARGURA}px;
+            height: {CENARIO_ALTURA}px;
             position: relative;
             margin: auto;
             border: 3px solid black;
-        }
-        .personagem, .inimigo {
+        }}
+        .personagem {{
             position: absolute;
             transition: all 0.2s;
-        }
+        }}
         </style>
         """,
         unsafe_allow_html=True
     )
 
+    # ======= DIVIDIR EM DUAS COLUNAS =======
     col1, col2 = st.columns([3, 1])
 
-    # Cenário
+    # Cenário na esquerda
     with col1:
-        html = f'<div class="cenario">'
-        html += f'<img src="{st.session_state.img}" class="personagem" style="left:{st.session_state.x}px; top:{st.session_state.y}px;" width="{PERSONAGEM_TAM}">'
-        for inimigo in st.session_state.inimigos:
-            html += f'<img src="https://i.imgur.com/6KcJrKj.png" class="inimigo" style="left:{inimigo["x"]}px; top:{inimigo["y"]}px;" width="{PERSONAGEM_TAM}">'
-        html += '</div>'
-        st.markdown(html, unsafe_allow_html=True)
+        st.markdown(
+            f"""
+            <div class="cenario">
+                <img src="{st.session_state.img}" 
+                    class="personagem" 
+                    style="left:{st.session_state.x}px; top:{st.session_state.y}px;" 
+                    width="{PERSONAGEM_TAM}">
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
-    # Controles e pontuação
+    # Botões na direita
     with col2:
-        st.write(f"### Pontos: {st.session_state.pontos}")
+        st.write("### Controles")
         st.button("⬆️", on_click=move_up)
         col_a, col_b, col_c = st.columns([1,1,1])
         with col_a:
@@ -867,7 +825,3 @@ elif menu == "Jogo":
             st.button("⬇️", on_click=move_down)
         with col_c:
             st.button("➡️", on_click=move_right)
-
-        if not st.session_state.vivo:
-            st.warning("💀 Você morreu!")
-            st.button("🔄 Reiniciar", on_click=reset_jogo)
