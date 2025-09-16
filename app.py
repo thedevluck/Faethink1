@@ -583,7 +583,7 @@ base_conhecimento = [
     },
     {
         "keywords": ["comunicados", "avisos", "escola"],
-        "resposta": "No site oficial da FAETEC / ETER, no portal do aluno, em murais físicos, e-mails institucionais ou avisos da Direção/Coordenação."
+        "resposta": "Nos murais físicos, e-mails institucionais ou avisos da Direção/Coordenação."
     },
     {
         "keywords": ["mudanca", "calendario", "escolar", "alteracao"],
