@@ -765,7 +765,7 @@ elif menu == "Jogo":
         st.session_state.score = 0
         st.session_state.itens = []
         st.session_state.cooldown = True  # jogo ativo
-        ITEM_IMG = "https://i.imgur.com/0YQG4Yn.png"
+        ITEM_IMG = "https://i.imgur.com/i23vEr2.png"
 
         # gerar 5 itens aleatórios
         for _ in range(5):
